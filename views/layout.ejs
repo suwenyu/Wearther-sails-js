@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Wearther</title>
+
+    <!-- Viewport mobile tag for sensible mobile support -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+    <script src="/js/jquery.min.js"></script>
+    <script type="text/javascript" src="/js/FB.js"></script>
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <!--
+        Stylesheets and Preprocessors
+        ==============================
+
+        You can always bring in CSS files manually with `<link>` tags, or asynchronously
+        using a solution like AMD (RequireJS).  Or, if you like, you can take advantage
+        of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+        By default, stylesheets from your `assets/styles` folder are included
+        here automatically (between STYLES and STYLES END). Both CSS (.css) and LESS (.less)
+        are supported. In production, your styles will be minified and concatenated into
+        a single file.
+
+        To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Change the order of your CSS files
+            + Import stylesheets from other directories
+            + Use a different or additional preprocessor, like SASS, SCSS or Stylus
+    -->
+    <!--STYLES-->
+    <link rel="stylesheet" href="/styles/font-awesome.min.css">
+    <link rel="stylesheet" href="/styles/importer.css">
+    <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/materialize.min.css">
+    <!--STYLES END-->
+    <script type="text/javascript">
+      window.overlord = { csrf: "<%= _csrf %>" };
+    </script>
+    
+  </head>
+
+  <body>
+    <div class="row hide-on-large-only"></div>
+    <div class="panel">
+      <div class="row">
+        <div class="col m1"></div>
+        <div class="col s12 m3 weather_board" >
+            <div class="wea_addr">台北市 文山區</div>
+            <div class="row wea_temp">
+              <div class="col s2 i_am_nothing"></div>
+              <div class="col s8 m12 wea_num">29<div class="temp_unit">°C</div></div>
+              <!-- <div class="col s3 m6 temp_unit" >°C</div> -->
+              <div class="col s12 wea_detail">晴時多雲</div>
+            </div>
+            <div class="wea_wet">
+              <div class="wea_title">降雨機率</div>
+              <div class="wea_content">60%</div>
+            </div>
+            <div class="wea_quality">
+              <div class="wea_title">空氣AQI*</div>
+              <div class="wea_content">不健康</div>
+              <div class="aqi_hint"><p>-----------</p><p>AQI: 空氣質量指數</p></div>
+            </div>
+        </div>
+        <div class="col s12 m8" >
+          <div id="nav_desk" class="row">
+            <div class="col s12 hide-on-med-and-down">
+              <div class="row">
+                <div class="col s1">
+                  <a href="/weather/index">
+                    <i class="fa fa-home fa-lg" ></i>
+                  </a>
+                </div>
+                <div class="col s1">
+                  <a href="/posts/top">
+                    <i class="fa fa-compass fa-lg" ></i>
+                  </a>
+                </div>
+                <div class="col s4 searchfield">
+                  <a href="#">
+                    <i class="fa fa-search fa-lg"></i>
+                  </a>
+                </div>
+                <div class="col s3 offset-s2 profile">
+                  <a href="profile.html">
+                    <i class="fa fa-circle fa-lg"></i> yschiang
+                  </a>
+                </div>
+              </div>
+              <div class="col s11 hr"></div>
+            </div>
+          </div>
+          
+              <%- body %>
+        </div>
+      </div>
+    </div>
+
+    
+
+
+
+
+
+    <!--
+        Client-side Templates
+        ========================
+
+        HTML templates are important prerequisites of modern, rich client applications.
+        To work their magic, frameworks like Backbone, Angular, Ember, and Knockout require
+        that you load these templates client-side.
+
+        By default, your Gruntfile is configured to automatically load and precompile
+        client-side JST templates in your `assets/templates` folder, then
+        include them here automatically (between TEMPLATES and TEMPLATES END).
+
+        To customize this behavior to fit your needs, just edit `tasks/pipeline.js`.
+        For example, here are a few things you could do:
+
+            + Import templates from other directories
+            + Use a different template engine (handlebars, jade, dust, etc.)
+            + Internationalize your client-side templates using a server-side
+              stringfile before they're served.
+    -->
+
+    <!--TEMPLATES-->
+    
+    <!--TEMPLATES END-->
+
+
+    <!--
+
+      Client-side Javascript
+      ========================
+
+      You can always bring in JS files manually with `script` tags, or asynchronously
+      on the client using a solution like AMD (RequireJS).  Or, if you like, you can
+      take advantage of Sails' conventional asset pipeline (boilerplate Gruntfile).
+
+      By default, files in your `assets/js` folder are included here
+      automatically (between SCRIPTS and SCRIPTS END).  Both JavaScript (.js) and
+      CoffeeScript (.coffee) are supported. In production, your scripts will be minified
+      and concatenated into a single file.
+
+      To customize any part of the built-in behavior, just edit `tasks/pipeline.js`.
+      For example, here are a few things you could do:
+
+          + Change the order of your scripts
+          + Import scripts from other directories
+          + Use a different preprocessor, like TypeScript
+
+    -->
+
+    <!--SCRIPTS-->
+    <script src="/js/dependencies/sails.io.js"></script>
+    <script src="/js/block.js"></script>
+    <script src="/js/FB.js"></script>
+    <script src="/js/freewall.js"></script>
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/materialize.min.js"></script>
+    <!--SCRIPTS END-->
+  </body>
+</html>

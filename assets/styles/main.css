@@ -1,0 +1,190 @@
+@import url(//fonts.googleapis.com/earlyaccess/cwtexhei.css);
+*{
+    font-family: 'cwTeXHei', sans-serif;
+}
+html {
+    height: 100%;
+}
+body {
+    height: 100%;
+    background: #FFB1BE; /* For browsers that do not support gradients */    
+    background: -webkit-repeating-linear-gradient(left, #FFB1BE , #FFC39E); /* For Safari 5.1 to 6.0 */
+    background: -o-repeating-linear-gradient(right, #FFB1BE, #FFC39E); /* For Opera 11.1 to 12.0 */
+    background: -moz-repeating-linear-gradient(right, #FFB1BE, #FFC39E); /* For Firefox 3.6 to 15 */
+    background: repeating-linear-gradient(to right, #FFB1BE , #FFC39E); /* Standard syntax (must be last) */
+}
+a{
+    /*cursor: pointer;*/
+}
+
+img {
+    max-width: 100%;
+    height:auto;
+}
+
+.center {
+    display: block;
+    margin: 0 auto;
+}
+.weather_board > div, .cloth_recommand {
+    /*text-align: center;*/
+    /*padding-left: 50px;*/
+    padding-top: 50px;
+    color: #FFF;
+}
+.wea_addr{
+    /*padding-top: 50px;*/
+    font-size: 24px;
+}
+.wea_temp{
+    /*padding-top: 50px;*/
+}
+.wea_num{
+    font-size: 120px; 
+    font-weight: bold;
+    line-height: 1.0;
+    display: inline ;
+}
+.temp_unit{
+    font-size: 24px;
+    display: inline;
+    vertical-align: 65px;
+}
+.wea_detail{
+    font-size: 28px;
+    font-weight: bold;
+}
+.wea_wet{
+    /*padding-top: 50px;*/
+}
+.wea_quality{
+    padding-top: 20px;
+}
+.wea_title{
+    font-size: 24px;
+}
+.wea_content{
+    font-size: 36px;
+    font-weight: bold;
+}
+.aqi_hint{
+    padding-top: 20px;
+}
+.aqi_hint > p{
+    line-height: 0.5;
+}
+.i_am_nothing{
+    display: none;
+}
+#nav_desk{
+    padding-top: 40px;
+}
+.fa, .profile a{
+    color: #fff;
+    padding-left: 5px;
+}
+.profile{
+    text-align: right;
+}
+.hr{
+    width:100%; 
+    height:1px; 
+    background: #fff;
+}
+.index_title p{
+    color: #fff;
+    font-size: 24px;
+    font-weight: bold;
+}
+.dress_name{
+    font-size: 20px;
+    font-weight: bold;
+}
+.swapchoice{
+    color: #fff;
+}
+
+    .brick {
+                width: 188px;
+                margin: 5px;
+                float: left;
+            }
+            .info {
+                margin-top: -75px;
+                margin-left: 8px;
+                color: #fff;
+                /*float: left;*/
+                line-height: 25%;
+            }
+            .brick img {
+                margin: 0px;
+                padding: 0px;
+                display: block;
+            }
+            .info > div > b{
+                font-size: 24px;
+            }
+            .info > div > p{
+                font-size: 12px;
+            }
+.upload_pic{
+    position: absolute;
+    top:120px;
+    right: 55px;
+}
+/*    .label{
+        text-align:justify;
+    }
+    .labell{
+        float: left;
+    }
+    .labelr{
+        float: right;
+    }*/
+
+/*.searchfield{
+    margin-top: -20px;
+}*/
+/*input[type=text] {
+    width: 130px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    border-bottom: 0px ;
+    font-size: 16px;
+    background-image: url('searchicon.png');
+    background-position: 10px 10px; 
+    background-repeat: no-repeat;
+    padding: 12px 20px 12px 40px;
+    -webkit-transition: width 0.4s ease-in-out;
+    transition: width 0.4s ease-in-out;
+}
+
+input[type=text]:focus {
+    width: 80%;
+    background-color: white;
+}
+*/
+
+
+
+@media screen and (max-width: 600px) {
+    .nav-icon {
+        width: 25%;
+        text-align: center;
+        line-height: 64px;
+    }
+    nav ul a {
+        height: 64px;
+    }
+    nav i.material-icons {
+        height: 64px;
+        line-height: 64px;
+    }
+    .weather_board > div{
+        text-align: center;
+    }
+    .i_am_nothing{
+        display: block;
+    }
+}

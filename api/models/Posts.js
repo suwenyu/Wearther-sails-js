@@ -6,8 +6,29 @@
  */
 
 module.exports = {
+	schema : true,
 
-  attributes: {
+  	attributes: {
+	  	fd:{
+	  		type:'string',
+	  	},
+	  	filetype:{
+	  		type:'string',
+	  	},
+	  	filename:{
+	  		type:'string',
+	  	},
+	  	textParams:{
+	  		type:'string',
+	  	},
+	    ownname_real:{
+	      type:'string'
+	    },
+	    
+	  	ownname:{
+	      model :'user'
+	  	}
+
 
   }
 };

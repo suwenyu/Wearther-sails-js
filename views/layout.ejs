@@ -5,10 +5,13 @@
 
     <!-- Viewport mobile tag for sensible mobile support -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+    
     <script src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/FB.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <script src="/js/materialize.min.js"></script>
+    <!-- Latest compiled and minified CSS -->
+
     <!--
         Stylesheets and Preprocessors
         ==============================
@@ -30,10 +33,15 @@
             + Use a different or additional preprocessor, like SASS, SCSS or Stylus
     -->
     <!--STYLES-->
+    <link rel="stylesheet" href="/styles/custom.min.css">
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/main.css">
     <link rel="stylesheet" href="/styles/materialize.min.css">
+    <!-- <link rel="stylesheet" href="/styles/page-center.css"> -->
+    <link rel="stylesheet" href="/styles/perfect-scrollbar.css">
+    <link rel="stylesheet" href="/styles/prism.css">
+    <link rel="stylesheet" href="/styles/style.min.css">
     <!--STYLES END-->
     <script type="text/javascript">
       window.overlord = { csrf: "<%= _csrf %>" };
@@ -84,9 +92,16 @@
                   </a>
                 </div>
                 <div class="col s3 offset-s2 profile">
-                  <a href="/account/">
-                    <i class="fa fa-circle fa-lg"></i> yschiang
-                  </a>
+                <% if (session.authenticated) { %>
+                    <% if(session.User.fbid) { %>
+                        <img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="50" width="50" alt="" class="img-circle ">
+                    <% } %>
+                    
+                  <a href="/account/index/<%= session.User.id %>"><%= session.User.name %> </a> 
+                  <% } %>
+                  <% if (!session.authenticated) { %>
+                    <a id="myBtn" href="#modal1"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</a>
+                   <% } %>
                 </div>
               </div>
               <div class="col s11 hr"></div>
@@ -98,7 +113,85 @@
       </div>
     </div>
 
+
+<!-- Modal -->
+  <div class="modal" id="modal1">
+    <div class="modal-dialog">
     
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:35px 50px;">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        </div>
+        <div class="modal-body" style="padding:40px 50px;">
+          <form role="form" action="/account/login" method="POST" >
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="mdi-social-person-outline prefix"></i>
+                <input id="username" type="text" name="email">
+                <label for="username" class="center-align">Username</label>
+              </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <i class="mdi-action-lock-outline prefix"></i>
+                <input id="password" type="password" name="password">
+                <label for="password">Password</label>
+              </div>
+            </div>
+            
+            <div class="row">          
+              <div class="input-field col s12 m12 l12  login-text">
+                  <input type="checkbox" id="remember-me" />
+                  <label for="remember-me">Remember me</label>
+              </div>
+            </div>
+
+            
+              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              
+          </form>
+          <div id="fb-root"></div>
+              <a class="fb-login btn btn-block btn-social btn-facebook">
+              <span class="fa fa-facebook"></span> Sign in with Facebook
+              </a>
+        </div>
+        <div class="modal-footer">
+          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Not a member? <a href="/account/new">Sign Up</a></p>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
+
+
+<!-- <div id="modal1" class="modal">
+  <div class="modal-content">
+    <div class="modalupload" style="height: 300px;text-align: center;">
+      <i class="fa fa-upload fa-5x" style="color: #ccc" aria-hidden="true"></i>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">上傳</a>
+  </div>
+</div> -->
+
+
+<script>
+$(document).ready(function(){
+    
+    $('#modal1').modal();
+
+   $('.fb-login').on('click',function(){
+    Login();
+   });
+
+
+
+});
+</script>
 
 
 
@@ -156,10 +249,17 @@
     <!--SCRIPTS-->
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/block.js"></script>
+    <script src="/js/custom-script.js"></script>
     <script src="/js/FB.js"></script>
     <script src="/js/freewall.js"></script>
     <script src="/js/jquery.min.js"></script>
     <script src="/js/materialize.min.js"></script>
+    <script src="/js/perfect-scrollbar.min.js"></script>
+    <script src="/js/plugins.min.js"></script>
+    <script src="/js/prism.js"></script>
     <!--SCRIPTS END-->
   </body>
+
+
+
 </html>

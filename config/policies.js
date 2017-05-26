@@ -27,6 +27,14 @@ module.exports.policies = {
   ***************************************************************************/
 
   // '*': true,
+  '*':[true,'flash'],
+
+  AccountController:{
+    profile:['sessionAuth','flash']
+  },
+  PostsController:{
+    index:['sessionAuth','flash']
+  }
 
   /***************************************************************************
   *                                                                          *

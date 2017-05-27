@@ -1,23 +1,65 @@
 $( document ).ready(function() {
 
   getLocation().then(function(result){
+    
     return getWeather(result);
   }).then(function(result){
+    
     return getAQI(result);
   }).then(function(result){
+    
     console.log(result);
     return appendData(result);
   }).then(function(result){
-    console.log('success')
+    
+    return deliverData(result);
+  }).then(function(result){
+    
+    console.log(result);
+    return appendClothes(result);
+  }).then(function(result){
+    console.log('success');
   });
 });
+
+function appendClothes(result){
+  return new Promise(function(resolve, reject){
+    $('#recom_body > div').remove();
+    $('#recom_foot > div').remove();
+
+    result.recom_body.forEach(function(data){
+      $('#recom_body').append('<div>'+ data +'</div>');
+    });
+    result.recom_foot.forEach(function(data){
+      $('#recom_foot').append('<div>'+ data +'</div>');
+    });
+
+
+    resolve(result);
+  });
+}
+
+
+function deliverData(result){
+  return new Promise(function(resolve, reject){
+    $.ajax({
+      method:'POST',
+      url:'/weather/clothes',
+      data:result
+    }).done(function(result){
+      console.log(result);
+      resolve(result);
+    });
+  });
+}
 
 function appendData(result){
   return new Promise(function(resolve, reject){
     result.weather_data.temp = Math.round(result.weather_data.temp);
-    $('#countryName').html(result.weather_data.countryname);
-    $('#temp').html(result.weather_data.temp);
-    $('#description').html(result.weather_data.description);
+    $('#countryName').hide().html(result.weather_data.countryname).fadeIn(2000);
+    $('#temp').hide().html(result.weather_data.temp).fadeIn(3000);
+    $('#description').hide().html(result.weather_data.description).fadeIn(4000);
+    $('#aqi').hide().html(result.aqi.country_aqi).fadeIn(5000);
     resolve(result);
   });
 }

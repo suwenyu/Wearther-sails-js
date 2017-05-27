@@ -61,7 +61,7 @@ module.exports.connections = {
     schema: true,
     // url: process.env.DB_URL,
     url:'mongodb://nccucsboy:nccucsboy@ds123050.mlab.com:23050/weather_clothes',
-  },
+  }
 
   /***************************************************************************
   *                                                                          *

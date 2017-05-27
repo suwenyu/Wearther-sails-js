@@ -9,6 +9,7 @@
     <script src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/FB.js"></script>
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    
     <script src="/js/materialize.min.js"></script>
     <!-- Latest compiled and minified CSS -->
 
@@ -37,8 +38,8 @@
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
     <link rel="stylesheet" href="/styles/importer.css">
     <link rel="stylesheet" href="/styles/main.css">
+    <link rel="stylesheet" href="/styles/materialize.css">
     <link rel="stylesheet" href="/styles/materialize.min.css">
-    <!-- <link rel="stylesheet" href="/styles/page-center.css"> -->
     <link rel="stylesheet" href="/styles/perfect-scrollbar.css">
     <link rel="stylesheet" href="/styles/prism.css">
     <link rel="stylesheet" href="/styles/style.min.css">
@@ -55,12 +56,12 @@
       <div class="row">
         <div class="col m1"></div>
         <div class="col s12 m3 weather_board" >
-            <div class="wea_addr">台北市 文山區</div>
+            <div class="wea_addr" id="countryName">台北市 文山區</div>
             <div class="row wea_temp">
               <div class="col s2 i_am_nothing"></div>
-              <div class="col s8 m12 wea_num">29<div class="temp_unit">°C</div></div>
+              <div class="col s8 m12 wea_num" id="temp">29<div class="temp_unit">°C</div></div>
               <!-- <div class="col s3 m6 temp_unit" >°C</div> -->
-              <div class="col s12 wea_detail">晴時多雲</div>
+              <div class="col s12 wea_detail" id="description">晴時多雲</div>
             </div>
             <div class="wea_wet">
               <div class="wea_title">降雨機率</div>
@@ -128,9 +129,9 @@
           <form role="form" action="/account/login" method="POST" >
             <div class="row margin">
               <div class="input-field col s12">
-                <i class="mdi-social-person-outline prefix"></i>
-                <input id="username" type="text" name="email">
-                <label for="username" class="center-align">Username</label>
+                <i class="fa fa-user" aria-hidden="true"></i>
+                <input id="email" type="text" name="email">
+                <label for="email" class="center-align">Email</label>
               </div>
             </div>
             <div class="row margin">
@@ -187,12 +188,8 @@ $(document).ready(function(){
    $('.fb-login').on('click',function(){
     Login();
    });
-
-
-
 });
 </script>
-
 
 
 
@@ -253,9 +250,9 @@ $(document).ready(function(){
     <script src="/js/FB.js"></script>
     <script src="/js/freewall.js"></script>
     <script src="/js/jquery.min.js"></script>
+    <script src="/js/main.js"></script>
     <script src="/js/materialize.min.js"></script>
     <script src="/js/perfect-scrollbar.min.js"></script>
-    <script src="/js/plugins.min.js"></script>
     <script src="/js/prism.js"></script>
     <!--SCRIPTS END-->
   </body>

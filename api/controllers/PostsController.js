@@ -7,6 +7,7 @@
 
 module.exports = {
 	top:function(req, res, next){
+
 		res.view('posts/top')
 	}
 };

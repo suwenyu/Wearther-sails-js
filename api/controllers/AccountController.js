@@ -9,13 +9,49 @@ module.exports = {
 	index:function(req, res, next){
 		var id = req.param('id');
         console.log(id);
-        User.findOne({id:id} , function(err, user){
-        	console.log(user);
+        User.findOne({id:id} , function(err, user_data){
+        	console.log(user_data);
 
             if (err) return next(err);
-            if (!user) return next();
+            if (!user_data) return next();
+            console.log(typeof user_data.id);
 
-        	res.view('account/index')
+            Posts.find({'ownname_real':user_data.name}).exec(function(err, result){
+                
+                Follow.native(function(err, collection){
+                    collection.aggregate([
+                    {
+                        $lookup:{
+                            from: "posts",
+                            localField: "to",
+                            foreignField: "ownname",
+                            as: "user_follow"
+                        }
+                    },
+                    {
+                        $match : {
+                            from : '58cc3d6c2c77c70577fbbd74'
+                        }
+                    }
+                    ],function(err, follow_data){
+                        console.log(follow_data);
+                        res.view('account/index',{
+                            user_data:user_data,
+                            result: result,
+                            follow_data: follow_data
+                        });
+                    });
+                });
+
+
+                
+            })
+
+            // res.view('account/index',{
+            //             user_data:user_data,
+            //             result:result
+            //         });
+        	
         });
 
 		

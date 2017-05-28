@@ -8,37 +8,14 @@
 module.exports = {
 	top:function(req, res, next){
 
-		// Posts.native(function(err, collection){
-		// 	collection.aggregate([
-		// 	{
-		// 		$lookup:{
-		// 			from: "user",
-		// 			localField: "ownname_real",
-		// 			foreignField: "name",
-		// 			as: "post_user"
-		// 		}
-		// 	},
-		// 	{
-		// 		$sort:{
-		// 			createdAt: -1
-		// 		}
-		// 	},
-		// 	{
-		// 		$limit:5
-		// 	}
-		// 	],function(err, result){
-		// 		console.log(result);
-		// 	});
-		// });
-
 
 		User.native(function(err, collection){
 			collection.aggregate([
 			{
 				$lookup:{
 					from: "posts",
-					localField: "name",
-					foreignField: "ownname_real",
+					localField: "_id",
+					foreignField: "ownname",
 					as: "post_user"
 				}
 			},
@@ -48,7 +25,7 @@ module.exports = {
 				}
 			},
 			{
-				$limit: 5
+				$limit: 10
 			}
 			],function(err, result){
 				res.view('posts/top',{

@@ -1,7 +1,7 @@
 <div class="row">
 	<div class="col s1 hide-on-med-and-down"></div>
 	<div class="col s9 index_title">
-		<p>yschiang</p> <a class="waves-effect waves-light btn" href="/account/logout">logout</a>
+		<p><%- user_data.name %></p> <a class="waves-effect waves-light btn" href="/account/logout">logout</a>
 		<p style="margin-top: -25px;font-size: 12px;">台北市 文山區</p>
 	</div>
 	<div class="col s1 add_pic" style="padding-top: 28px">
@@ -10,7 +10,81 @@
 		</a>
 	</div>
 </div>
+
 <div class="row">
+	<div class="col s1 hide-on-med-and-down"></div>
+	<div class="col s9 m9 l9 swapchoice">
+		<div class="row">
+			<ul class="tabs">
+			    <li class="tab col s4"><a href="#inbox">Inbox</a></li>
+			    <li class="tab col s4"><a href="#unread">Unread</a></li>
+			    <li class="tab col s4"><a href="#sent">Sent</a></li>
+	  		</ul>
+		</div>
+	</div>
+</div>
+
+	<div id="inbox" class="col s12">
+		<div class="row">
+			<div class="col s1 hide-on-med-and-down "></div>
+			<div class="col s9">
+				<div id="freewall" class="free-wall">
+					<% if (result.length != 0) { %>
+				    <% result.forEach(function(data){ %>
+				    <div class="brick">
+				        <img src="<%- data.fd %>" width="100%">
+				        <div class="info">
+				            <div>
+						        <b>29°C</b>
+						        <p><%- data.ownname_real %></p>
+						        <p class="labell"><%- data.textParams %></p>
+					            <br>
+					            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
+				        	</div>
+				        </div>
+				    </div>
+				    <% }); %>
+				    <% } %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="unread" class="col s12">
+		<div class="row">
+			<div class="col s1 hide-on-med-and-down "></div>
+			<div class="col s9">
+				<div id="freewall" class="free-wall">
+					
+					<% if (follow_data.length != 0 ) { %>
+					<% follow_data.forEach(function(data){ %>
+					<% if(data.user_follow.length != 0){ %>
+
+				    <div class="brick">
+				        <img src="<%- data.user_follow[0].fd %>" width="100%">
+				        <div class="info">
+				            <div>
+						        <b>29°C</b>
+						        <p><%- data.user_follow[0].ownname_real %></p>
+						        <p class="labell"><%- data.user_follow[0].textParams %></p>
+					            <br>
+					            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
+				        	</div>
+				        </div>
+				    </div>
+				    <% } %>
+				    <% }); %>
+				    <% } %>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="sent" class="col s12">Sent</div>
+
+
+
+
+
+<!-- <div class="row">
 	<div class="col s1 hide-on-med-and-down"></div>
 	<div class="col s6 m5 l3 swapchoice">
 		<div class="row">
@@ -21,8 +95,8 @@
 
 		</div>
 	</div>
-</div>
-<div class="row">
+</div> -->
+<!-- <div class="row">
 	<div class="col s1 hide-on-med-and-down "></div>
 	<div class="col s9">
 		<div id="freewall" class="free-wall">
@@ -52,5 +126,5 @@
 		    </div>
 		</div>
 	</div>
-</div>
+</div> -->
 

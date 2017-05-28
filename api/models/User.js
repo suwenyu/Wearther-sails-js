@@ -10,10 +10,6 @@ module.exports = {
   schema: true,
     attributes: {
 
-        posts:{
-            collection: 'posts',
-            via:'ownname'
-        },
         name: {
             type: 'string',
             required: true,

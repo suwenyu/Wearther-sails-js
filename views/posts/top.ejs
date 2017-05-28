@@ -14,18 +14,23 @@
 	<div class="col s1 hide-on-med-and-down "></div>
 	<div class="col s9">
 	<div id="freewall" class="free-wall">
+
+		<% result.forEach(function(user){ %>
+		<% if(user.post_user.length != 0){ %>
 		<div class="brick">
-	        <img src="/images/cloth01.jpg" width="100%">
+	        <img src="<%- user.post_user[0].fd %>" width="100%">
 	        <div class="info">
 	        	<div>
 			        <b>29°C</b>
-			        <p>rainbow0312</p>
-			        <p class="labell">#短袖 #長褲</p>
+			        <p><%- user.name %></p>
+			        <p class="labell"><%- user.post_user[0].textParams %></p>
 		            <br>
 		            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
 	        	</div>
 	        </div>
 	    </div>
+	    <% } %>
+	    <% }); %>
 	    <div class="brick">
 	        <img src="/images/cloth02.jpg" width="100%">
 	        <div class="info">

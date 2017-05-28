@@ -1,6 +1,6 @@
 $( document ).ready(function() {
 
-  getLocation().then(function(result){
+  getLocation(result).then(function(result){
     
     return getWeather(result);
   }).then(function(result){
@@ -103,20 +103,29 @@ function getWeather(result){
 function getLocation(){
   return new Promise(function(resolve, reject){
 
+    <% if (session.location) { %>
+      var lat = "<%- session.location.lat %>";
+      var lng = "<%- session.location.lng %>";
+    <% } else{ %>
+      var lat = undefined;
+      var lng = undefined;
+    <% } %>
+    console.log(lat , lng);
+
     // console.log('test1');
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(function(location_data){
-      // console.log(location.coords.latitude);
-      // console.log(location.coords.longitude);
-      var loca_data = {};
-      var location = {};
-      location['lat'] = location_data.coords.latitude;
-      location['lng'] = location_data.coords.longitude;
-      loca_data['location'] = location;
-      console.log(loca_data);
+        // console.log(location.coords.latitude);
+        // console.log(location.coords.longitude);
+        var loca_data = {};
+        var location = {};
+        location['lat'] = location_data.coords.latitude;
+        location['lng'] = location_data.coords.longitude;
+        loca_data['location'] = location;
+        console.log(loca_data);
 
-      resolve(loca_data);
-    });
+        resolve(loca_data);
+      });
     }
 
 

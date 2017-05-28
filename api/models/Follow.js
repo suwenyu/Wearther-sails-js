@@ -9,10 +9,10 @@ module.exports = {
 
   attributes: {
   	from:{
-
+  		model: 'user'
 	},
 	to:{
-		
+		model: 'user'
 	}
   }
 };

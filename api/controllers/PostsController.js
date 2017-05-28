@@ -28,6 +28,7 @@ module.exports = {
 				$limit: 10
 			}
 			],function(err, result){
+				console.log(result);
 				res.view('posts/top',{
 					result: result
 				});

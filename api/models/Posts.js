@@ -26,7 +26,7 @@ module.exports = {
 	    },
 	    
 	  	ownname:{
-	      type:'string'
+	      model :'user'
 	  	}
 
 

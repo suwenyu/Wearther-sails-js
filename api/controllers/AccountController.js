@@ -9,6 +9,9 @@ module.exports = {
 	index:function(req, res, next){
 		var id = req.param('id');
         console.log(id);
+
+        var ObjectId = require('mongodb').ObjectID;
+
         User.findOne({id:id} , function(err, user_data){
         	console.log(user_data);
 
@@ -30,7 +33,7 @@ module.exports = {
                     },
                     {
                         $match : {
-                            from : '58cc3d6c2c77c70577fbbd74'
+                            from :  new ObjectId(user_data.id)
                         }
                     }
                     ],function(err, follow_data){

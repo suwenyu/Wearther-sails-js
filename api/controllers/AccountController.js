@@ -59,6 +59,13 @@ module.exports = {
 
 		
 	},
+    detail: function(req, res, next){
+        var id = req.param('id');
+        Posts.find({ownname:id}).exec(function(err,user_data){
+            console.log(user_data);
+            res.view('account/detail' , {user_data:user_data});
+        });
+    },
 	login: function(req, res, next) {
         var email = req.param('email');
         var password = req.param('password');

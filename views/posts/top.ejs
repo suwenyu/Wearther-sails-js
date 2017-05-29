@@ -22,7 +22,7 @@
 	        <div class="info">
 	        	<div>
 			        <b>29°C</b>
-			        <p><%- user.name %></p>
+			        <p><a href="/account/detail/<%- user.post_user[0].ownname %>"><%- user.name %></a></p>
 			        <p class="labell"><%- user.post_user[0].textParams %></p>
 		            <br>
 		            <i id="<%- user.post_user[0].ownname %>" class="fa fa-heart-o fa-lg like" aria-hidden="true"></i>

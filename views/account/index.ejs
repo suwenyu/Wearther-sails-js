@@ -59,15 +59,15 @@
 					<% follow_data.forEach(function(data){ %>
 					<% if(data.user_follow.length != 0){ %>
 
-				    <div class="brick">
+				    <div class="brick" id="brick_<%- data.to %>">
 				        <img src="<%- data.user_follow[0].fd %>" width="100%">
 				        <div class="info">
 				            <div>
 						        <b>29°C</b>
-						        <p><%- data.user_follow[0].ownname_real %></p>
+						        <p><a href="/account/detail/<%- data.to %>"><%- data.user_follow[0].ownname_real %></a></p>
 						        <p class="labell"><%- data.user_follow[0].textParams %></p>
 					            <br>
-					            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
+					            <i id="<%- data.to %>" class="fa fa-heart fa-lg like" aria-hidden="true"></i>
 				        	</div>
 				        </div>
 				    </div>
@@ -83,48 +83,36 @@
 
 
 
+<script>
+	$( document ).ready(function() {
+		$('.like').click(function(){
+			console.log($(this).attr('id'));
+			follow_or_unfollow($(this).attr('id')).then(function(data){
+				$('#brick_'+data.id).remove();
+				console.log('success remove');
+			});
+		});
+	});
 
-<!-- <div class="row">
-	<div class="col s1 hide-on-med-and-down"></div>
-	<div class="col s6 m5 l3 swapchoice">
-		<div class="row">
-			<div class="col s6" style="border-bottom:1px #fff solid; ">你的貼文</div>
-			<div class="col s6">蒐藏貼文</div>
-			<div class="col s6"></div>
-			<div class="col s6"></div>
 
-		</div>
-	</div>
-</div> -->
-<!-- <div class="row">
-	<div class="col s1 hide-on-med-and-down "></div>
-	<div class="col s9">
-		<div id="freewall" class="free-wall">
-		    <div class="brick">
-		        <img src="/images/cloth05.jpg" width="100%">
-		        <div class="info">
-		            <div>
-				        <b>29°C</b>
-				        <p>yschiang</p>
-				        <p class="labell">#短袖 #長褲</p>
-			            <br>
-			            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
-		        	</div>
-		        </div>
-		    </div>
-		    <div class="brick">
-		        <img src="/images/cloth06.jpg" width="100%">
-		        <div class="info">
-		            <div>
-				        <b>29°C</b>
-				        <p>yschiang</p>
-				        <p class="labell">#短袖 #長褲</p>
-			            <br>
-			            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
-		        	</div>
-		        </div>
-		    </div>
-		</div>
-	</div>
-</div> -->
+	function follow_or_unfollow(user_id){
+		var user_data = {};
+		user_data['id'] = user_id;
+
+		return new Promise(function(resolve, reject){
+			$.ajax({
+				method:'GET',
+				url: '/follow/index?user_id='+user_id
+			}).done(function(data){
+				user_data['follow'] = data.follow;
+				user_data['message'] = 'success';
+				resolve(user_data);
+			}).fail(function(){
+				alert('failed');
+				user_data['message'] = 'fail';
+				resolve(user_data);
+			});
+		});
+	}
+</script>
 

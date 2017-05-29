@@ -1,0 +1,24 @@
+<div class="row">
+	<div class="col s1 hide-on-med-and-down "></div>
+	<div class="col s9">
+	<div id="freewall" class="free-wall">
+
+		<% user_data.forEach(function(post){ %>
+		<div class="brick">
+	        <img src="<%- post.fd %>" width="100%">
+	        <div class="info">
+	        	<div>
+			        <b>29°C</b>
+			        <p><%- post.ownname_real %></p>
+			        <p class="labell"><%- post.textParams %></p>
+		            <br>
+		            <!-- <i id="<%- post.ownname %>" class="fa fa-heart-o fa-lg like" aria-hidden="true"></i> -->
+	        	</div>
+	        </div>
+	    </div>
+	    <% }); %>
+
+
+	</div>
+	</div>
+</div>

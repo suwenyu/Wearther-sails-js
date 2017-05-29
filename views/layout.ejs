@@ -66,7 +66,7 @@
             </div>
             <div class="wea_wet">
               <div class="wea_title">降雨機率</div>
-              <div class="wea_content">60%</div>
+              <div id="chanceofrain" class="wea_content">60%</div>
             </div>
             <div class="wea_quality">
               <div class="wea_title">空氣AQI*</div>
@@ -197,26 +197,105 @@ $(document).ready(function(){
   $( document ).ready(function() {
 
   getLocation().then(function(result){
-    
-    return getWeather(result);
+    return getaddress(result);
   }).then(function(result){
+
+    // return getWeather(result);
+  // }).then(function(result){
     
     return getAQI(result);
   }).then(function(result){
     
-    console.log(result);
+    // console.log(result);
+
+    return worldweatherapi(result);
+  }).then(function(result){
+
     return appendData(result);
   }).then(function(result){
-    
+
     return deliverData(result);
   }).then(function(result){
     
-    console.log(result);
+    // console.log(result);
     return appendClothes(result);
   }).then(function(result){
     console.log('success');
   });
 });
+
+
+function getaddress(result){
+  return new Promise(function(resolve, reject){
+    $.ajax({
+      method:'GET',
+      url:'https://maps.googleapis.com/maps/api/geocode/json?latlng='+result.location.lat+','+result.location.lng+'&key=AIzaSyD2hw_JtqQA44hpglku1Nh1bPQte110PGc'
+    }).done(function(data){
+      result['location'].city = data.results[0].address_components[4].long_name;
+      result['location'].dist = data.results[0].address_components[3].long_name;
+      resolve(result);
+    });
+  });
+}
+
+
+function worldweatherapi(result){
+  return new Promise(function(resolve, reject){
+    console.log(result.location.lng);
+    $.ajax({
+      method:'GET',
+      url: 'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=be8f810e29c54a748be73359172705&q='+parseFloat(result.location.lat).toFixed(2)+','+parseFloat(result.location.lng).toFixed(2)+'&format=json&num_of_days=1&includelocation=yes'
+    }).done(function(data){
+      var weather_time = getCurrentTime();
+
+      console.log(data.data.weather[0].hourly[weather_time].tempC);
+
+      var new_weather = {};
+      new_weather['temp'] = data.data.weather[0].hourly[weather_time].tempC;
+      new_weather['chanceofrain'] = data.data.weather[0].hourly[weather_time].chanceofrain;
+      new_weather['weatherDesc'] = data.data.weather[0].hourly[weather_time].weatherDesc[0].value;
+      result['new_weather'] = new_weather;
+
+      resolve(result);
+    });
+  });
+}
+
+function addZero(i) {
+    if (i < 10) {
+        i = "0" + i;
+    }
+    return i;
+}
+
+
+
+function getCurrentTime(){
+  var d = new Date();
+  var h = addZero(d.getHours());
+  var m = addZero(d.getMinutes());
+
+  var time = parseInt(h*100) + parseInt(m);
+  console.log(time);
+  if(time < 130)
+    return 0;
+  else if(time < 430)
+    return 1;
+  else if (time < 730)
+    return 2;
+  else if (time < 1030)
+    return 3;
+  else if (time < 1330)
+    return 4;
+  else if (time < 1630)
+    return 5;
+  else if (time < 1930)
+    return 6;
+  else if (time < 2230)
+    return 7;
+  else
+    return 0;
+}
 
 function appendClothes(result){
   return new Promise(function(resolve, reject){
@@ -251,11 +330,12 @@ function deliverData(result){
 
 function appendData(result){
   return new Promise(function(resolve, reject){
-    result.weather_data.temp = Math.round(result.weather_data.temp);
-    $('#countryName').hide().html(result.weather_data.countryname).fadeIn();
-    $('#temp').hide().html(result.weather_data.temp).fadeIn();
-    $('#description').hide().html(result.weather_data.description).fadeIn();
+    // result.weather_data.temp = Math.round(result.weather_data.temp);
+    $('#countryName').hide().html(result.location.city +"  "+ result.location.dist).fadeIn();
+    $('#temp').hide().html(result.new_weather.temp + '<div class="temp_unit">°C</div>').fadeIn();
+    $('#description').hide().html(result.new_weather.weatherDesc).fadeIn();
     $('#aqi').hide().html(result.aqi.country_aqi).fadeIn();
+    $('#chanceofrain').hide().html(result.new_weather.chanceofrain + "%").fadeIn();
     resolve(result);
   });
 }

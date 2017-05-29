@@ -8,8 +8,8 @@
 module.exports = {
 	index:function(req,res ,next){
 		// console.log(req.param('id'));
-		console.log(req.body.user_id);
-		var user_id = req.body.user_id;
+		console.log(req.param('user_id'));
+		var user_id = req.param('user_id');
 		// User.findOne({"id":req.param('id')}).exec(function(err, user){
 			Follow.findOne({'from' : req.session.User.id , 'to': user_id}).exec(function(err, found){
 				console.log(found);

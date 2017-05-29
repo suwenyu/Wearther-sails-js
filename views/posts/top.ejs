@@ -25,7 +25,7 @@
 			        <p><%- user.name %></p>
 			        <p class="labell"><%- user.post_user[0].textParams %></p>
 		            <br>
-		            <i class="fa fa-heart-o fa-lg" aria-hidden="true"></i>
+		            <i id="<%- user.post_user[0].ownname %>" class="fa fa-heart-o fa-lg like" aria-hidden="true"></i>
 	        	</div>
 	        </div>
 	    </div>
@@ -36,3 +36,60 @@
 	</div>
 	</div>
 </div>
+
+
+<% if (session.authenticated){ %>
+<% user_follow_list.forEach(function(item){ %>
+  <script>
+    $("#<%- item.to %>").attr('class', 'fa fa-heart fa-lg like');
+  </script>
+
+<% }); %>
+<% } %>
+
+<script>
+	$( document ).ready(function() {
+		$('.like').click(function(){
+			console.log($(this).attr('id'));
+			follow_or_unfollow($(this).attr('id')).then(function(data){
+				return change_button(data);
+			}).then(function(){
+				console.log('success');
+			});
+		});
+	});
+
+	function change_button(data){
+
+		if(data.message == 'success'){
+			if(data.follow == 'yes'){
+				$('#'+data.id).attr('class', 'fa fa-heart fa-lg like');
+			}
+			else{
+				$('#'+data.id).attr('class', 'fa fa-heart-o fa-lg like');
+			}
+		}
+	}
+
+	function follow_or_unfollow(user_id){
+		var user_data = {};
+		user_data['id'] = user_id;
+
+		return new Promise(function(resolve, reject){
+			$.ajax({
+				method:'GET',
+				url: '/follow/index?user_id='+user_id
+			}).done(function(data){
+				user_data['follow'] = data.follow;
+				user_data['message'] = 'success';
+				resolve(user_data);
+			}).fail(function(){
+				alert('failed');
+				user_data['message'] = 'fail';
+				resolve(user_data);
+			});
+		});
+	}
+
+</script>
+

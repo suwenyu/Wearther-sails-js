@@ -3,11 +3,13 @@
         <div class="col s9 index_title">
           <p>今天適合穿什麼呢？</p>
         </div>
+        <% if (session.authenticated) { %>
         <div class="col s1 add_pic" style="padding-top: 28px">
-          <a href="#" style="width:100%;height: 100%;">
+          <a href="#modal2" style="width:100%;height: 100%;">
             <i class="fa fa-plus-circle fa-2x" aria-hidden="true"></i>
           </a>
         </div>
+        <% } %>
       </div>
       <div class="row cloth_recommand">
         <div class="col s1 hide-on-med-and-down"></div>

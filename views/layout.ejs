@@ -169,6 +169,42 @@
   </div> 
 
 
+<div id="modal2" class="modal">
+  <div class="modal-content">
+    <!-- <h4>Modal Header</h4> -->
+    <!-- <p>A bunch of text</p> -->
+    <div class="modalupload" style="height: 300px;text-align: center;">
+      <i class="fa fa-upload fa-5x" style="color: #ccc" aria-hidden="true"></i>
+    </div>
+    
+    <form action="/posts/upload" method="post" enctype="multipart/form-data">
+          
+          <div class="ui form">
+            <div class="field">
+              <label style="font-size:16px">請寫下您今天的穿搭衣服：</label>
+              <textarea class="form-control" type="text" name="foo" id="exampleTextarea" rows="10"></textarea>
+            </div>
+            <div class="ui divider"></div>
+            <div class="field">
+                 <label style="font-size:16px">請上傳您的照片檔:</label>
+               <label class="custom-file">
+                 <input type="file" id="file" class="custom-file-input" name="avatar">
+                 <span class="custom-file-control"></span>
+               </label>
+            </div>
+            
+          </div>
+
+          <div class="ui divider"></div>
+          
+          <button class="btn btn-info" type="submit">Submit</button>
+      </form>
+  </div>
+  <div class="modal-footer">
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">上傳</a>
+  </div>
+</div>
+
 <!-- <div id="modal1" class="modal">
   <div class="modal-content">
     <div class="modalupload" style="height: 300px;text-align: center;">
@@ -185,6 +221,7 @@
 $(document).ready(function(){
     
     $('#modal1').modal();
+    $('#modal2').modal();
 
    $('.fb-login').on('click',function(){
     Login();

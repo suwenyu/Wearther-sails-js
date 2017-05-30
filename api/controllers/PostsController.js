@@ -32,8 +32,8 @@ module.exports = {
 		    console.log(uploadedFiles[0].fd);
 
 		    var fileroute = uploadedFiles[0].fd.split('/')
-		    var fdroute = '/' + fileroute[6] + '/'+fileroute[7];
-		    // var fdroute = '/' + fileroute[3] + '/'+fileroute[4];
+		    // var fdroute = '/' + fileroute[6] + '/'+fileroute[7];
+		    var fdroute = '/' + fileroute[3] + '/'+fileroute[4];
 		    console.log(fdroute);
 
 

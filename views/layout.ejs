@@ -113,27 +113,28 @@
 
 
 <!-- Modal -->
-  <div class="modal" id="modal1">
+  <div class="modal" id="modal1" style="max-height:90%">
     <div class="modal-dialog">
     
       <!-- Modal content-->
       <div class="modal-content">
-        <div class="modal-header" style="padding:35px 50px;">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+        <div class="modal-header" style="padding:0px 50px;">
+          <!-- <button type="button" class="close" data-dismiss="modal">&times;</button> -->
+          <h4><i class="fa fa-lock" aria-hidden="true" style="color:black"></i> Login</h4>
         </div>
-        <div class="modal-body" style="padding:40px 50px;">
+        <div class="modal-body" style="padding:0px 50px 0px 50px;">
           <form role="form" action="/account/login" method="POST" >
             <div class="row margin">
               <div class="input-field col s12">
-                <i class="fa fa-user" aria-hidden="true"></i>
+                <i class="fa fa-user fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
                 <input id="email" type="text" name="email">
                 <label for="email" class="center-align">Email</label>
               </div>
             </div>
             <div class="row margin">
               <div class="input-field col s12">
-                <i class="mdi-action-lock-outline prefix"></i>
+                <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+                <i class="fa fa-key fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
                 <input id="password" type="password" name="password">
                 <label for="password">Password</label>
               </div>
@@ -146,17 +147,22 @@
               </div>
             </div>
 
-            
-              <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
-              
+            <div class="row">
+              <div class="col s4 offset-s4">
+                <button type="submit" class="btn btn-success btn-block" style="width:100%"><span class="glyphicon glyphicon-off"></span> Login</button>
+              </div>
+            </div>
           </form>
-          <div id="fb-root"></div>
+          <div id="fb-root" class="row">
+            <div class="col s8 offset-s2">
               <a class="fb-login btn btn-block btn-social btn-facebook">
               <span class="fa fa-facebook"></span> Sign in with Facebook
               </a>
+            </div>
+          </div>
         </div>
         <div class="modal-footer">
-          <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <button class="btn btn-danger btn-default pull-left modal-close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
           <p>Not a member? <a href="/account/new">Sign Up</a></p>
         </div>
       </div>
@@ -165,12 +171,16 @@
   </div> 
 
 
-<div id="modal2" class="modal">
+<div id="modal2" class="modal" style="max-height:90%">
   <div class="modal-content">
     <!-- <h4>Modal Header</h4> -->
     <!-- <p>A bunch of text</p> -->
-    <div class="modalupload" style="height: 300px;text-align: center;">
-      <i class="fa fa-upload fa-5x" style="color: #ccc" aria-hidden="true"></i>
+    <div id="uploadblock" class="modalupload" style="height: 300px;text-align: center;">
+      <div class="uploadicon">
+      <i class="fa fa-upload fa-5x" aria-hidden="true"></i>
+      <p>點此上傳你的相片</p>
+      <input type="file" id="uploadfile" style="display: none;">
+      </div>
     </div>
     
     <form action="/posts/upload" method="post" enctype="multipart/form-data">
@@ -194,10 +204,11 @@
           <div class="ui divider"></div>
           
           <button class="btn btn-info" type="submit">Submit</button>
+
       </form>
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">上傳</a>
+    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">cancel</a>
   </div>
 </div>
 
@@ -453,7 +464,12 @@ function getLocation(){
 }
 </script>
 
-
+<script>
+$('#uploadblock').on('click',function(){
+  // alert("hi!");
+  $('#uploadfile').click();
+});
+</script>
 
     <!--
         Client-side Templates

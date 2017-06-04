@@ -37,7 +37,6 @@
     <link rel="stylesheet" href="/styles/custom.min.css">
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
     
-    <link rel="stylesheet" href="/styles/materialize.css">
     <link rel="stylesheet" href="/styles/materialize.min.css">
     <link rel="stylesheet" href="/styles/perfect-scrollbar.css">
     <link rel="stylesheet" href="/styles/prism.css">
@@ -202,11 +201,10 @@
       <div class="uploadicon">
         <i class="fa fa-upload fa-5x" aria-hidden="true"></i>
         <p>點此上傳你的相片</p>
-        <input type="file" id="uploadfile" name="avatar" style="display: none;">
-        
         
       </div>
     </div>
+    <input type="file" id="uploadfile" name="avatar" style="display: none;">
     <img alt="" id="blah" height="100px" width="100px">
     
     
@@ -233,7 +231,7 @@
     <button class="btn cyan darken-1 clothes-tag" type="button" id="雨傘">#雨傘</button>
     <button class="btn cyan darken-1 clothes-tag" type="button" id="圍巾">#圍巾</button>
     
-    
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="test">#test</button>
     <br>
     <br>
 
@@ -302,6 +300,15 @@ $(document).ready(function(){
       // $("#"+clothes_name ).attr('class', 'btn cyan darken-2 clothes-tag-save');
 
     });
+
+    $('#uploadblock').on('click',function(){
+      // alert("hi!");
+      $('#uploadfile').trigger('click');
+    });
+    $('#test').on('click',function(){
+      $('#uploadfile').trigger('click');
+    });
+
 
     $('input.autocomplete').autocomplete({
         data: {
@@ -569,20 +576,14 @@ function getLocation(){
 
       resolve(loca_data);lng
     }
-
-    
-    
-
-
   });
+
+
 }
 </script>
 
 <script>
-$('#uploadblock').on('click',function(){
-  // alert("hi!");
-  $('#uploadfile').click();
-});
+
 </script>
 
     <!--
@@ -638,7 +639,6 @@ $('#uploadblock').on('click',function(){
     <script src="/js/dependencies/sails.io.js"></script>
     <script src="/js/block.js"></script>
     <script src="/js/custom-script.js"></script>
-    <script src="/js/FB.js"></script>
     <script src="/js/freewall.js"></script>
     <script src="/js/perfect-scrollbar.min.js"></script>
     <script src="/js/prism.js"></script>

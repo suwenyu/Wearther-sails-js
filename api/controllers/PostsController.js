@@ -32,12 +32,11 @@ module.exports = {
 		    console.log(uploadedFiles[0].fd);
 
 		    var fileroute = uploadedFiles[0].fd.split('/')
-		    var fdroute = '/' + fileroute[6] + '/'+fileroute[7];
-		    // var fdroute = '/' + fileroute[3] + '/'+fileroute[4];
+		    // var fdroute = '/' + fileroute[6] + '/'+fileroute[7];
+		    var fdroute = '/' + fileroute[3] + '/'+fileroute[4];
 		    console.log(fdroute);
 
-
-			Posts.create({fd : fdroute , filetype:uploadedFiles[0].type , filename:uploadedFiles[0].filename , textParams:req.allParams().foo, ownname:req.session.User.id ,ownname_real:req.session.User.name}).exec(function (err, file) {
+			Posts.create({fd : fdroute , filetype:uploadedFiles[0].type , filename:uploadedFiles[0].filename , textParams:req.allParams().foo, temperature:req.allParams().temp , ownname:req.session.User.id ,ownname_real:req.session.User.name}).exec(function (err, file) {
 				if (err){
 		          console.log(err);
 		        };
@@ -49,7 +48,7 @@ module.exports = {
 
 
 			if (err) return res.serverError(err);
-			else res.redirect('weather/index');
+			else res.redirect('account/index/'+req.session.User.id);
 	    });
   	},
 	top:function(req, res, next){
@@ -98,6 +97,58 @@ module.exports = {
 			});
 		});
 
+	},
+	search:function(req,res,next){
+		var query = req.param('q');
+		console.log(query);
+
+		User.native(function(err, collection){
+			collection.aggregate([
+			{
+				$lookup:{
+					from: "posts",
+					localField: "_id",
+					foreignField: "ownname",
+					as: "post_user"
+				}
+			},
+			{
+				$match:{
+					$or:[{'post_user.textParams':{$regex : ".*"+query+".*"}} ,{'post_user.ownname_real':{$regex : ".*"+query+".*"}}]
+				}
+			},
+			{
+				$sort:{
+					"post_user.createdAt": -1
+				}
+			},
+			{
+				$limit: 10
+			}
+			],function(err, result){
+				// console.log(result);
+
+				if(req.session.authenticated != undefined){
+					console.log('1')
+					Follow.find({'from':req.session.User.id}).exec(function(err, user_follow_list){
+		  				// console.log(user_follow_list);
+		  				// console.log(user_follow_list);
+		  				res.view({
+				  			user_follow_list:user_follow_list,
+				  			result: result
+				  		});
+		  			});
+				}
+				else{
+					user_follow_list = [];
+					res.view('posts/top',{
+						user_follow_list:user_follow_list,
+						result: result
+					});
+				}
+				
+			});
+		});
 	}
 };
 

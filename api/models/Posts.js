@@ -21,6 +21,9 @@ module.exports = {
 	  	textParams:{
 	  		type:'string',
 	  	},
+	  	temperature:{
+	  		type:'string'
+	  	},
 	    ownname_real:{
 	      type:'string'
 	    },

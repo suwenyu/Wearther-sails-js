@@ -8,6 +8,8 @@
     
     <script src="/js/jquery.min.js"></script>
     <script type="text/javascript" src="/js/FB.js"></script>
+    <script src="/js/materialize.min.js"></script>
+
     <!-- <script src="/js/main.js"></script> -->
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
 
@@ -34,12 +36,13 @@
     <!--STYLES-->
     <link rel="stylesheet" href="/styles/custom.min.css">
     <link rel="stylesheet" href="/styles/font-awesome.min.css">
-    <link rel="stylesheet" href="/styles/main.css">
+    
     <link rel="stylesheet" href="/styles/materialize.css">
     <link rel="stylesheet" href="/styles/materialize.min.css">
     <link rel="stylesheet" href="/styles/perfect-scrollbar.css">
     <link rel="stylesheet" href="/styles/prism.css">
     <link rel="stylesheet" href="/styles/style.min.css">
+    <link rel="stylesheet" href="/styles/main.css">
     <!--STYLES END-->
     <script type="text/javascript">
       window.overlord = { csrf: "<%= _csrf %>" };
@@ -56,17 +59,17 @@
             <div class="wea_addr" id="countryName">台北市 文山區</div>
             <div class="row wea_temp">
               <div class="col s2 i_am_nothing"></div>
-              <div class="col s8 m12 wea_num" id="temp">29<div class="temp_unit">°C</div></div>
+              <div class="col s8 m12 wea_num" id="temp"><div class="temp_unit">°C</div></div>
               <!-- <div class="col s3 m6 temp_unit" >°C</div> -->
               <div class="col s12 wea_detail" id="description">晴時多雲</div>
             </div>
             <div class="wea_wet">
               <div class="wea_title">降雨機率</div>
-              <div id="chanceofrain" class="wea_content">60%</div>
+              <div id="chanceofrain" class="wea_content"></div>
             </div>
             <div class="wea_quality">
               <div class="wea_title">空氣AQI*</div>
-              <div class="wea_content" id="aqi">不健康</div>
+              <div class="wea_content" id="aqi"></div>
               <div class="aqi_hint"><p>-----------</p><p>AQI: 空氣質量指數</p></div>
             </div>
         </div>
@@ -84,23 +87,38 @@
                     <i class="fa fa-compass fa-lg" ></i>
                   </a>
                 </div>
-                <div class="col s4 searchfield">
+                <div class="col s1 searchfield">
                   <a href="#">
                     <i class="fa fa-search fa-lg"></i>
                   </a>
                 </div>
-                <div class="col s3 offset-s2 profile">
-                <% if (session.authenticated) { %>
-                    <% if(session.User.fbid) { %>
-                        <img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="50" width="50" alt="" class="img-circle ">
-                    <% } %>
-                    
-                  <a href="/account/index/<%= session.User.id %>"><%= session.User.name %> </a> 
-                  <% } %>
-                  <% if (!session.authenticated) { %>
-                    <a id="myBtn" href="#modal1"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</a>
-                   <% } %>
+                <div class="col s4 ">
+                <form role="search" method="POST" action="/posts/search">
+                  <input type="text" id="autocomplete-input" class="autocomplete" style="color:white;" name="q">
+                </form>
+                  
                 </div>
+                
+                <% if (session.authenticated) { %>
+                  <div class="col s1 offset-s2 profile">
+                    <% if(session.User.fbid) { %>
+                        <img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="70" width="70" alt="" class="circle responsive-img">
+                    <% } %>
+                  </div>
+                  <div class="col s2">
+                    <a href="/account/index/<%= session.User.id %>"><%= session.User.name %> </a>
+                  </div>
+                <% } else { %>
+                  <div class="col s2 offset-s2 profile">
+                    <a id="myBtn" href="#modal1"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</a>
+                  </div>
+                <% } %>
+
+
+
+    
+ 
+
               </div>
               <div class="col s11 hr"></div>
             </div>
@@ -175,37 +193,54 @@
   <div class="modal-content">
     <!-- <h4>Modal Header</h4> -->
     <!-- <p>A bunch of text</p> -->
+    <form action="/posts/upload" method="post" enctype="multipart/form-data">
+    
+    <input type="text" name="foo"  style="display: none;" id="clothes_input">
+    <input type="text" name="temp"  style="display: none;" id="temp_input">
+
     <div id="uploadblock" class="modalupload" style="height: 300px;text-align: center;">
       <div class="uploadicon">
-      <i class="fa fa-upload fa-5x" aria-hidden="true"></i>
-      <p>點此上傳你的相片</p>
-      <input type="file" id="uploadfile" style="display: none;">
+        <i class="fa fa-upload fa-5x" aria-hidden="true"></i>
+        <p>點此上傳你的相片</p>
+        <input type="file" id="uploadfile" name="avatar" style="display: none;">
+        
+        
       </div>
     </div>
+    <img alt="" id="blah" height="100px" width="100px">
     
-    <form action="/posts/upload" method="post" enctype="multipart/form-data">
-          
-          <div class="ui form">
-            <div class="field">
-              <label style="font-size:16px">請寫下您今天的穿搭衣服：</label>
-              <textarea class="form-control" type="text" name="foo" id="exampleTextarea" rows="10"></textarea>
-            </div>
-            <div class="ui divider"></div>
-            <div class="field">
-                 <label style="font-size:16px">請上傳您的照片檔:</label>
-               <label class="custom-file">
-                 <input type="file" id="file" class="custom-file-input" name="avatar">
-                 <span class="custom-file-control"></span>
-               </label>
-            </div>
-            
-          </div>
+    
 
-          <div class="ui divider"></div>
-          
-          <button class="btn btn-info" type="submit">Submit</button>
+    <br>
+    <br>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="襯衫">#襯衫</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="短袖">#短袖</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="長袖">#長袖</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="針織衫">#針織衫</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="羊毛衫">#羊毛衫</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="POLP衫">#POLP衫</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="風衣">#風衣</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="大衣">#大衣</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="外套">#外套</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="帽T">#帽T</button>
+    <br>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="短褲">#短褲</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="七/八分褲">#七/八分褲</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="牛仔褲">#牛仔褲</button>
+    <br>
 
-      </form>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="帽子">#帽子</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="雨傘">#雨傘</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="圍巾">#圍巾</button>
+    
+    
+    <br>
+    <br>
+
+
+    <button class="btn btn-info" type="submit">Submit</button>
+    </form>
+
   </div>
   <div class="modal-footer">
     <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">cancel</a>
@@ -230,10 +265,87 @@ $(document).ready(function(){
     $('#modal1').modal();
     $('#modal2').modal();
 
-   $('.fb-login').on('click',function(){
-    Login();
-   });
+    $('.fb-login').on('click',function(){
+      Login();
+    });
+
+    $("#uploadfile").change(function(){
+      // console.log(this);
+      readURL(this);
+    });
+
+    $('#textarea1').trigger('autoresize');
+
+
+
+    $('.clothes-tag').click(function(){
+
+      var clothes_name = $(this).attr('id');
+      // console.log(clothes_name);
+      var test = $('#clothes_input').val();
+      // console.log(test);
+      console.log(test.search(clothes_name));
+      if(test.search(clothes_name)!=-1){
+        test = test.replace(" #"+clothes_name , "");
+        $('#clothes_input').val(test);
+        $("#"+clothes_name ).attr('class', 'btn cyan darken-1 clothes-tag')
+      }
+      else{
+        test = test + " #" + clothes_name;
+        $('#clothes_input').val(test);
+        $("#"+clothes_name ).attr('class', 'btn cyan darken-2 clothes-tag')
+      }
+      console.log(test);
+
+      
+
+      // $("#"+clothes_name ).attr('class', 'btn cyan darken-2 clothes-tag-save');
+
+    });
+
+    $('input.autocomplete').autocomplete({
+        data: {
+          "襯衫": null,
+          "短袖": null,
+          "長袖": null,
+          "針織衫": null,
+          "羊毛衫": null,
+          "POLP衫": null,
+          "風衣": null,
+          "大衣": null,
+          "外套": null,
+          "帽T": null,
+          "短褲": null,
+          "七/八分褲": null,
+          "牛仔褲": null,
+          "帽子": null,
+          "雨傘": null,
+          "圍巾": null
+
+      },
+        limit: 20, // The max amount of results that can be shown at once. Default: Infinity.
+        onAutocomplete: function(val) {
+          // Callback function when value is autcompleted.
+        },
+        minLength: 1, // The minimum length of the input for the autocomplete to start. Default: 1.
+      });
+    
 });
+
+
+function readURL(input) {
+
+  if (input.files && input.files[0]) {
+    var reader = new FileReader();
+
+    reader.onload = function (e) {
+      // console.log(e.target.result);
+      $('#blah').attr('src', e.target.result);
+    }
+
+    reader.readAsDataURL(input.files[0]);
+  }
+}
 </script>
 
 
@@ -378,8 +490,10 @@ function appendData(result){
     $('#countryName').hide().html(result.location.city +"  "+ result.location.dist).fadeIn();
     $('#temp').hide().html(result.new_weather.temp + '<div class="temp_unit">°C</div>').fadeIn();
     $('#description').hide().html(result.new_weather.weatherDesc).fadeIn();
-    $('#aqi').hide().html(result.aqi.country_aqi).fadeIn();
+    $('#aqi').hide().html('<div class="circle" style="background:'+ result.aqi.country_color +'"></div>' + result.aqi.country_aqi).fadeIn();
     $('#chanceofrain').hide().html(result.new_weather.chanceofrain + "%").fadeIn();
+    $('#temp_input').val(result.new_weather.temp);
+
     resolve(result);
   });
 }
@@ -526,11 +640,10 @@ $('#uploadblock').on('click',function(){
     <script src="/js/custom-script.js"></script>
     <script src="/js/FB.js"></script>
     <script src="/js/freewall.js"></script>
-    <script src="/js/jquery.min.js"></script>
-    <script src="/js/materialize.min.js"></script>
     <script src="/js/perfect-scrollbar.min.js"></script>
     <script src="/js/prism.js"></script>
     <!--SCRIPTS END-->
+
   </body>
 
 

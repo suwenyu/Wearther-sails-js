@@ -14,7 +14,7 @@ body {
     background: repeating-linear-gradient(to right, #FFB1BE , #FFC39E); /* Standard syntax (must be last) */
 }
 a{
-    /*cursor: pointer;*/
+    color: #fff;
 }
 
 img {
@@ -158,6 +158,28 @@ img {
 .uploadicon{
     padding-top: 100px;
 }
+
+
+form p {
+    text-align: center !important;
+}
+.fa-heart{
+    color:#f00;
+}
+
+.clothes-tag{
+    height: 30px !important;
+    border-radius: 50px !important;
+    margin-top:10px;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 30px;
+    height: 30px; 
+    /* width and height can be anything, as long as they're equal */
+}
+
 /*#file {
     width: 100%;
     height: 100%;

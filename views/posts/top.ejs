@@ -20,14 +20,19 @@
 		<% result.forEach(function(user){ %>
 		<% if(user.post_user.length != 0){ %>
 		<div class="brick">
-	        <img src="<%- user.post_user[0].fd %>" width="100%">
+	        <img src="<%- user.post_user[user.post_user.length-1].fd %>" width="100%">
 	        <div class="info">
 	        	<div>
-			        <b>29°C</b>
-			        <p><a href="/account/detail/<%- user.post_user[0].ownname %>"><%- user.name %></a></p>
-			        <p class="labell"><%- user.post_user[0].textParams %></p>
+	        		<% if(user.post_user[user.post_user.length-1].temperature){ %>
+			        	<b><%- user.post_user[user.post_user.length-1].temperature %>°C</b>
+			        <% } else { %>
+			        	<b>18°C</b>
+			        <% } %>
+			        
+			        <p><a href="/account/detail/<%- user.post_user[user.post_user.length-1].ownname %>"><%- user.name %></a></p>
+			        <p class="labell"><%- user.post_user[user.post_user.length-1].textParams %></p>
 		            <br>
-		            <i id="<%- user.post_user[0].ownname %>" class="fa fa-heart-o fa-lg like" aria-hidden="true"></i>
+		            <i id="<%- user.post_user[user.post_user.length-1].ownname %>" class="fa fa-heart-o fa-lg like" aria-hidden="true"></i>
 	        	</div>
 	        </div>
 	    </div>

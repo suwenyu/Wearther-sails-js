@@ -80,7 +80,7 @@ module.exports = {
 					Follow.find({'from':req.session.User.id}).exec(function(err, user_follow_list){
 		  				// console.log(user_follow_list);
 		  				// console.log(user_follow_list);
-		  				res.view({
+		  				res.view('posts/top',{
 				  			user_follow_list:user_follow_list,
 				  			result: result
 				  		});
@@ -133,7 +133,7 @@ module.exports = {
 					Follow.find({'from':req.session.User.id}).exec(function(err, user_follow_list){
 		  				// console.log(user_follow_list);
 		  				// console.log(user_follow_list);
-		  				res.view({
+		  				res.view('posts/top',{
 				  			user_follow_list:user_follow_list,
 				  			result: result
 				  		});

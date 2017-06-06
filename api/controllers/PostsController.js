@@ -19,7 +19,7 @@ module.exports = {
 	    .upload({
 
 	      // You can apply a file upload limit (in bytes)
-	      dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+	      // dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
 	      // avatarUrl: require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), req.session.me)
 	      maxBytes: 1000000
 

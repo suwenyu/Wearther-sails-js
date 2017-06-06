@@ -59,6 +59,29 @@ module.exports = {
 
 		
 	},
+    signup: function(req, res, next) {
+        console.log('create')
+        var user_id = req.param('username'),
+            email = req.param('email'),
+            password = req.param('password'),
+            gender = req.param('group1'),
+            area = req.param('area');
+
+            console.log(user_id , email , password, gender, area);
+
+
+        User.create({ name: user_id,gender:gender,area:area,email: email, encryptedPassword: password }, function(err, user) {
+            if (err) {
+                console.log(err);
+                req.session.flash['text'].push('User Email has been used!');
+                return res.redirect('back');
+            }
+            req.session.authenticated = true;
+            req.session.User = user;
+            res.redirect('account/index/' + user.id);
+        });
+
+    },
     detail: function(req, res, next){
         var id = req.param('id');
         Posts.find({ownname:id}).exec(function(err,user_data){

@@ -180,7 +180,7 @@
         </div>
         <div class="modal-footer">
           <button class="btn btn-danger btn-default pull-left modal-close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
-          <p>Not a member? <a href="/account/new">Sign Up</a></p>
+          <p>Not a member? <a href="#modal3" style="color: chocolate;">Sign Up</a></p>
         </div>
       </div>
       
@@ -223,7 +223,7 @@
     <button class="btn cyan darken-1 clothes-tag" type="button" id="帽T">#帽T</button>
     <br>
     <button class="btn cyan darken-1 clothes-tag" type="button" id="短褲">#短褲</button>
-    <button class="btn cyan darken-1 clothes-tag" type="button" id="七/八分褲">#七/八分褲</button>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="七八分褲">#七八分褲</button>
     <button class="btn cyan darken-1 clothes-tag" type="button" id="牛仔褲">#牛仔褲</button>
     <br>
 
@@ -231,7 +231,6 @@
     <button class="btn cyan darken-1 clothes-tag" type="button" id="雨傘">#雨傘</button>
     <button class="btn cyan darken-1 clothes-tag" type="button" id="圍巾">#圍巾</button>
     
-    <button class="btn cyan darken-1 clothes-tag" type="button" id="test">#test</button>
     <br>
     <br>
 
@@ -245,16 +244,77 @@
   </div>
 </div>
 
-<!-- <div id="modal1" class="modal">
+
+
+
+<div id="modal3" class="modal"  style="max-height:90%">
   <div class="modal-content">
-    <div class="modalupload" style="height: 300px;text-align: center;">
-      <i class="fa fa-upload fa-5x" style="color: #ccc" aria-hidden="true"></i>
+    <div class="modal-header" style="padding:0px 50px;">
+      <h4><i class="fa fa-user-plus" aria-hidden="true" style="color:black"></i> Sign Up</h4>
+    </div>
+
+    <div class="modal-body" style="padding:0px 50px 0px 50px;">
+      <form role="form" action="/account/signup" method="POST" >
+        <div class="row margin">
+          <div class="input-field col s12">
+            <i class="fa fa-user fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+            <input id="email1" type="text" name="email">
+            <label for="email1" class="center-align">Email</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+            <i class="fa fa-key fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+            <input id="password1" type="password" name="password">
+            <label for="password1">Password</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+            <i class="fa fa-key fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+            <input id="confirmpassword" type="password" name="confirmpassword">
+            <label for="confirmpassword">ConfirmPassword</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+            <i class="fa fa-user-o fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+            <input id="username" type="text" name="username">
+            <label for="username">UserName</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+            <i class="fa fa-venus-mars fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+            <input name="group1" type="radio" id="test1" value="male" />
+            <label for="test1">Male</label>
+            <input name="group1" type="radio" id="test2" value="female" />
+            <label for="test2">Female</label>
+          </div>
+        </div>
+        <div class="row margin">
+          <div class="input-field col s12">
+            <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+            <i class="fa fa-map-marker fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+            <input id="area" type="text" name="area">
+            <label for="area">Area</label>
+          </div>
+        </div>
+        
+
+        <div class="row">
+          <div class="col s4 offset-s4">
+            <button type="submit" class="btn btn-success btn-block" style="width:100%"> Signup</button>
+          </div>
+        </div>
+      </form>
     </div>
   </div>
-  <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">上傳</a>
-  </div>
-</div> -->
+</div>
 
 
 <script>
@@ -262,6 +322,7 @@ $(document).ready(function(){
     
     $('#modal1').modal();
     $('#modal2').modal();
+    $('#modal3').modal();
 
     $('.fb-login').on('click',function(){
       Login();
@@ -291,7 +352,7 @@ $(document).ready(function(){
       else{
         test = test + " #" + clothes_name;
         $('#clothes_input').val(test);
-        $("#"+clothes_name ).attr('class', 'btn cyan darken-2 clothes-tag')
+        $("#"+clothes_name ).attr('class', 'btn orange lighten-1 clothes-tag')
       }
       console.log(test);
 

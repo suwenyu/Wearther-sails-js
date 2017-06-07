@@ -50,7 +50,38 @@
   </head>
 
   <body>
-    <div class="row hide-on-large-only"></div>
+    <div class="row hide-on-large-only">
+      <nav style="position: fixed;height:64px;z-index: 9999999;">
+        <div class="nav-wrapper">
+          <!-- <a href="#" class="brand-logo right">Logo</a> -->
+          <ul id="nav-mobile" class="left">
+                    
+            <li><a href="/weather/"><i class="fa fa-home fa-lg" style="line-height:64px;"></i></a></li>
+            <li><a href="/posts/top"><i class="fa fa-compass fa-lg" style="line-height:64px;"></i></a></li>
+            <li><a onclick="toggleSearch();"><i class="fa fa-search fa-lg" style="line-height:64px;"></i></a></li>
+            <li id="searchbar" style="position: fixed;margin-top: 64px;background-color:#e53935;width:100%;display:none">
+                <form role="search" method="POST" action="/posts/search" style="padding:0px 10px">
+                  <input type="text" id="autocomplete-input" class="autocomplete" style="color:white" name="q">
+                </form>
+            </li>
+          </ul>
+          <ul class="right">
+            <li>
+                <% if (session.authenticated) { %>
+                    <% if(session.User.fbid) { %>
+                        <a href="/account/index/<%= session.User.id %>"><img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="50" width="50" alt="" class="img-circle "></a>
+                    <% } %>
+                    
+                  <!-- <a href="/account/index/<%= session.User.id %>"><%= session.User.name %> </a>  -->
+                  <% } %>
+                  <% if (!session.authenticated) { %>
+                    <a id="myBtn" href="#modal1"><i class="fa fa-sign-in fa-lg" aria-hidden="true" style="line-height: 64px;"></i></a>
+                   <% } %>
+                 </li>
+          </ul>
+        </div>
+      </nav>
+    </div>
     <div class="panel">
       <div class="row">
         <div class="col m1"></div>
@@ -93,7 +124,7 @@
                 </div>
                 <div class="col s4 ">
                 <form role="search" method="POST" action="/posts/search">
-                  <input type="text" id="autocomplete-input" class="autocomplete" style="color:white;" name="q">
+                  <input type="text" id="autocomplete-input" class="autocomplete" style="color:white;height:2rem;margin:0px" name="q">
                 </form>
                   
                 </div>
@@ -165,13 +196,13 @@
             </div>
 
             <div class="row">
-              <div class="col s4 offset-s4">
+              <div class="col s12 m4 offset-m4">
                 <button type="submit" class="btn btn-success btn-block" style="width:100%"><span class="glyphicon glyphicon-off"></span> Login</button>
               </div>
             </div>
           </form>
           <div id="fb-root" class="row">
-            <div class="col s8 offset-s2">
+            <div class="col s12 m8 offset-m2">
               <a class="fb-login btn btn-block btn-social btn-facebook">
               <span class="fa fa-facebook"></span> Sign in with Facebook
               </a>
@@ -307,7 +338,7 @@
         
 
         <div class="row">
-          <div class="col s4 offset-s4">
+          <div class="col s12 m4 offset-m4">
             <button type="submit" class="btn btn-success btn-block" style="width:100%"> Signup</button>
           </div>
         </div>
@@ -689,7 +720,14 @@ function getLocation(){
 </script>
 
 <script>
-
+function toggleSearch() {
+    var x = document.getElementById('searchbar');
+    if (x.style.display === 'none') {
+        x.style.display = 'block';
+    } else {
+        x.style.display = 'none';
+    }
+}
 </script>
 
     <!--

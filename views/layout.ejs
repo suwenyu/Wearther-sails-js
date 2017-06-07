@@ -232,6 +232,7 @@
     <button class="btn cyan darken-1 clothes-tag" type="button" id="圍巾">#圍巾</button>
     
     <br>
+    <button class="btn cyan darken-1 clothes-tag" type="button" id="test">#test</button>
     <br>
 
 
@@ -367,7 +368,18 @@ $(document).ready(function(){
       $('#uploadfile').trigger('click');
     });
     $('#test').on('click',function(){
-      $('#uploadfile').trigger('click');
+      $.ajax({ 
+        url: 'https://api.imgur.com/3/image',
+        headers: {
+            'Authorization': 'Client-ID f1a4381d7d976b8'
+        },
+        type: 'POST',
+        data: {
+            'image': '/images/cloth01.jpg'
+        },
+        success: function(response) { console.log(response); }
+      });
+
     });
 
 

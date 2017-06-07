@@ -34,10 +34,14 @@
 					<% if (result.length != 0) { %>
 				    <% result.forEach(function(data){ %>
 				    <div class="brick">
+				    	<% if (data.fd) { %>
 				        <img src="<%- data.fd %>" width="100%">
+				        <% } else {%>
+				        <img src="<%- data.link %>" width="100%">
+						<% } %>
 				        <div class="info">
 				            <div>
-						        <b>29°C</b>
+						        <b><%- data.temperature %>°C</b>
 						        <p><%- data.ownname_real %></p>
 						        <p class="labell"><%- data.textParams %></p>
 					            <br>

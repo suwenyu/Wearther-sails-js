@@ -12,6 +12,12 @@ module.exports = {
 	  	fd:{
 	  		type:'string',
 	  	},
+	  	file_deletehash:{
+	  		type:'string',
+	  	},
+	  	link:{
+	  		type:'string',
+	  	},
 	  	filetype:{
 	  		type:'string',
 	  	},

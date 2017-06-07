@@ -6,51 +6,68 @@
  */
 
 module.exports = {
-	upload: function (req, res, next) {
-	    // e.g.
-	    // 0 => infinite
-	    // 240000 => 4 minutes (240,000 miliseconds)
-	    // etc.
-	    //
-	    // Node defaults to 2 minutes.
-	    res.setTimeout(0);
+	// upload: function (req, res, next) {
+	//     // e.g.
+	//     // 0 => infinite
+	//     // 240000 => 4 minutes (240,000 miliseconds)
+	//     // etc.
+	//     //
+	//     // Node defaults to 2 minutes.
+	//     res.setTimeout(0);
 
-	    req.file('avatar')
-	    .upload({
+	//     req.file('avatar')
+	//     .upload({
 
-	      // You can apply a file upload limit (in bytes)
-	      dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
-	      // avatarUrl: require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), req.session.me)
-	      maxBytes: 1000000
+	//       // You can apply a file upload limit (in bytes)
+	//       dirname: require('path').resolve(sails.config.appPath, 'assets/images'),
+	//       // avatarUrl: require('util').format('%s/user/avatar/%s', sails.getBaseUrl(), req.session.me)
+	//       maxBytes: 1000000
 
-	    }, function whenDone(err, uploadedFiles) {
+	//     }, function whenDone(err, uploadedFiles) {
 
-		    if (uploadedFiles.length === 0){
-		      	return res.badRequest('No file was uploaded');
-		    }
+	// 	    if (uploadedFiles.length === 0){
+	// 	      	return res.badRequest('No file was uploaded');
+	// 	    }
 
-		    console.log(uploadedFiles[0].fd);
+	// 	    console.log(uploadedFiles[0].fd);
 
-		    var fileroute = uploadedFiles[0].fd.split('/')
-		    // var fdroute = '/' + fileroute[6] + '/'+fileroute[7];
-		    var fdroute = '/' + fileroute[3] + '/'+fileroute[4];
-		    console.log(fdroute);
+	// 	    var fileroute = uploadedFiles[0].fd.split('/')
+	// 	    // var fdroute = '/' + fileroute[6] + '/'+fileroute[7];
+	// 	    var fdroute = '/' + fileroute[3] + '/'+fileroute[4];
+	// 	    console.log(fdroute);
 
-			Posts.create({fd : fdroute , filetype:uploadedFiles[0].type , filename:uploadedFiles[0].filename , textParams:req.allParams().foo, temperature:req.allParams().temp , ownname:req.session.User.id ,ownname_real:req.session.User.name}).exec(function (err, file) {
+	// 		Posts.create({fd : fdroute , filetype:uploadedFiles[0].type , filename:uploadedFiles[0].filename , textParams:req.allParams().foo, temperature:req.allParams().temp , ownname:req.session.User.id ,ownname_real:req.session.User.name}).exec(function (err, file) {
+	// 			if (err){
+	// 	          console.log(err);
+	// 	        };
+	// 		});
+	// 		console.log({
+	// 			files: uploadedFiles,
+	// 			textParams: req.allParams()
+	// 		});
+
+
+	// 		if (err) return res.serverError(err);
+	// 		else res.redirect('account/index/'+req.session.User.id);
+	//     });
+ //  	},
+	upload:function(req, res, next){
+		var pic_id = req.param('pic_id'),
+            pic_deletehash = req.param('pic_deletehash'),
+            clothes = req.param('clothes'),
+            pic_link = req.param('pic_link'),
+            pic_type = req.param('pic_type'),
+            temperature = req.param('temperature');
+
+            Posts.create({ file_deletehash:pic_deletehash, link:pic_link ,filetype:pic_type, textParams:clothes, temperature:temperature , ownname:req.session.User.id ,ownname_real:req.session.User.name}).exec(function (err, file) {
 				if (err){
 		          console.log(err);
 		        };
+		        res.json({
+		        	user_id:req.session.User.id
+		        })
 			});
-			console.log({
-				files: uploadedFiles,
-				textParams: req.allParams()
-			});
-
-
-			if (err) return res.serverError(err);
-			else res.redirect('account/index/'+req.session.User.id);
-	    });
-  	},
+	},
 	top:function(req, res, next){
 
 

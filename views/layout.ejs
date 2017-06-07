@@ -232,11 +232,10 @@
     <button class="btn cyan darken-1 clothes-tag" type="button" id="圍巾">#圍巾</button>
     
     <br>
-    <button class="btn cyan darken-1 clothes-tag" type="button" id="test">#test</button>
     <br>
 
 
-    <button class="btn btn-info" type="submit">Submit</button>
+    <button class="btn btn-info" type="button" id="test">Submit</button>
     </form>
 
   </div>
@@ -368,16 +367,50 @@ $(document).ready(function(){
       $('#uploadfile').trigger('click');
     });
     $('#test').on('click',function(){
-      $.ajax({ 
-        url: 'https://api.imgur.com/3/image',
-        headers: {
-            'Authorization': 'Client-ID f1a4381d7d976b8'
+      var formData = new FormData();
+      formData.append('type', 'file');
+      formData.append('image', $('input[type=file]')[0].files[0]);
+      // for (var pair of formData.entries()) {
+      //   console.log(pair[0]+ ', ' + pair[1]); 
+      // }
+
+      var settings = {
+        "async": true,
+        "crossDomain": true,
+        "url": "https://api.imgur.com/3/image",
+        "method": "POST",
+        "headers": {
+          "authorization": "Bearer 2738382cd811d5314f847424f8dbbc45e1a51c23",
         },
-        type: 'POST',
-        data: {
-            'image': '/images/cloth01.jpg'
-        },
-        success: function(response) { console.log(response); }
+        "processData": false,
+        "contentType": false,
+        "mimeType": "multipart/form-data",
+        "data": formData
+      }
+      $.ajax(settings).done(function (response) {
+        response = JSON.parse(response);
+
+        var uploaddata = {};
+        uploaddata['pic_id'] = response.data.id;
+        uploaddata['pic_type'] = response.data.type;
+        uploaddata['pic_link'] = response.data.link;
+        uploaddata['pic_deletehash'] = response.data.deletehash;
+        uploaddata['temperature'] = $('#temp_input').val();
+        uploaddata['clothes'] = $('#clothes_input').val();
+
+        console.log(uploaddata);
+        $.ajax({
+          url:'/posts/upload',
+          method:'GET',
+          data:uploaddata
+        }).done(function(data){
+          console.log(data);
+          window.location.replace('/account/index/' + data.user_id);
+        });
+
+
+      }).fail(function(fail){
+        console.log(fail);
       });
 
     });

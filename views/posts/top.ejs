@@ -20,7 +20,11 @@
 		<% result.forEach(function(user){ %>
 		<% if(user.post_user.length != 0){ %>
 		<div class="brick">
-	        <img src="<%- user.post_user[user.post_user.length-1].fd %>" width="100%">
+			<% if(user.post_user[user.post_user.length-1].fd){ %>
+	        	<img src="<%- user.post_user[user.post_user.length-1].fd %>" width="100%">
+	        <% }else{ %>
+	        	<img src="<%- user.post_user[user.post_user.length-1].link %>" width="100%">
+	        <% } %>
 	        <div class="info">
 	        	<div>
 	        		<% if(user.post_user[user.post_user.length-1].temperature){ %>

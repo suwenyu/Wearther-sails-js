@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
   <head>
@@ -378,18 +379,18 @@ $(document).ready(function(){
       if(test.search(clothes_name)!=-1){
         test = test.replace(" #"+clothes_name , "");
         $('#clothes_input').val(test);
-        $("#"+clothes_name ).attr('class', 'btn cyan darken-1 clothes-tag')
+        $("#"+clothes_name ).attr('class', 'btn-flat grey lighten-2 white-text clothes-tag')
       }
       else{
         test = test + " #" + clothes_name;
         $('#clothes_input').val(test);
-        $("#"+clothes_name ).attr('class', 'btn orange lighten-1 clothes-tag')
+        $("#"+clothes_name ).attr('class', 'btn-flat pink lighten-4 white-text clothes-tag')
       }
       console.log(test);
 
       
 
-      // $("#"+clothes_name ).attr('class', 'btn cyan darken-2 clothes-tag-save');
+      // $("#"+clothes_name ).attr('class', 'btn-flat grey lighten-2 white-text clothes-tag-save');
 
     });
 

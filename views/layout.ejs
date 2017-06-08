@@ -266,13 +266,13 @@
     <br>
     <br>
 
-
-    <button class="btn btn-info" type="button" id="test">Submit</button>
+    <a type="button" href="#!" class="modal-action modal-close waves-effect waves-green btn-flat right">cancel</a>
+    <button class="btn btn-info right" type="button" id="test" style="margin-right:5px">Submit</button>
     </form>
 
   </div>
   <div class="modal-footer">
-    <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">cancel</a>
+    <!-- <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">cancel</a> -->
   </div>
 </div>
 
@@ -348,6 +348,66 @@
   </div>
 </div>
 
+  <div class="modal" id="modal4" style="max-height:90%">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header" style="padding:0px 50px;">
+          <button type="button" class="modalclose modal-close right" data-dismiss="modal">
+            <i class="fa fa-times fa-lg" aria-hidden="true"></i>
+          </button>
+        </div>
+        <div class="modal-body" style="padding:0px 50px 0px 50px;">
+          <h5>設定預報地區</h5>
+            <div class="row margin">
+              <div class="col s12">
+                  <select name="location" form="location-set">
+                    <option value="taipei">台北市</option>
+                    <option value="taichung">台中市</option>
+                    <option value="kaohsiung">高雄市</option>
+                    <option value="???">???</option>
+                  </select>
+              </div>
+            </div>
+            <div class="row margin">
+              <div class="input-field col s12">
+                <!-- <i class="mdi-action-lock-outline prefix"></i> -->
+                <i class="fa fa-key fa-lg prefix" aria-hidden="true" style="color:black;line-height: 50px;"></i>
+                <input id="password" type="password" name="password">
+                <label for="password">Password</label>
+              </div>
+            </div>
+            
+            <div class="row">          
+              <div class="input-field col s12 m12 l12  login-text">
+                  <input type="checkbox" id="remember-me" />
+                  <label for="remember-me">Remember me</label>
+              </div>
+            </div>
+          <form id="location-set" role="form" action="" method="POST" >
+            <div class="row">
+              <div class="col s12 m4 offset-m4">
+                <button type="submit" class="btn btn-success btn-block" style="width:100%"><span class="glyphicon glyphicon-off"></span> Login</button>
+              </div>
+            </div>
+          </form>
+          <div id="fb-root" class="row">
+            <div class="col s12 m8 offset-m2">
+              <a class="fb-login btn btn-block btn-social btn-facebook">
+              <span class="fa fa-facebook"></span> Sign in with Facebook
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger btn-default pull-left modal-close" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+          <p>Not a member? <a href="#modal3" style="color: chocolate;">Sign Up</a></p>
+        </div>
+      </div>
+      
+    </div>
+  </div> 
 
 <script>
 $(document).ready(function(){
@@ -355,6 +415,7 @@ $(document).ready(function(){
     $('#modal1').modal();
     $('#modal2').modal();
     $('#modal3').modal();
+    $('#modal4').modal();
 
     $('.fb-login').on('click',function(){
       Login();

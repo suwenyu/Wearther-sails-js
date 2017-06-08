@@ -69,7 +69,11 @@
 				        <img src="<%- data.user_follow[0].fd %>" width="100%">
 				        <div class="info">
 				            <div>
-						        <b>29°C</b>
+				            	<% if(data.user_follow[0].temperature){ %>
+						        	<b><%-data.user_follow[0].temperature  %></b>
+						        <% } else{ %>
+						        	<b>18°C</b>
+								<% } %>
 						        <p><a href="/account/detail/<%- data.to %>"><%- data.user_follow[0].ownname_real %></a></p>
 						        <p class="labell"><%- data.user_follow[0].textParams %></p>
 					            <br>

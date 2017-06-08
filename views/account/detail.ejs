@@ -5,10 +5,18 @@
 
 		<% user_data.forEach(function(post){ %>
 		<div class="brick">
+			<% if (post.fd){ %>
 	        <img src="<%- post.fd %>" width="100%">
+	        <% } else {%>
+	        <img src="<%- post.link %>" width="100%">
+	        <% } %>
 	        <div class="info">
 	        	<div>
-			        <b>29°C</b>
+	        		<% if (post.temperature ){ %>
+			        	<b><%- post.temperature %>°C</b>
+			        <% } else { %>
+			        	<b>18°C</b>
+			        <% } %>
 			        <p><%- post.ownname_real %></p>
 			        <p class="labell"><%- post.textParams %></p>
 		            <br>

@@ -174,9 +174,9 @@ form p {
 }
 
 .clothes-tag{
-    height: 30px !important;
-    border-radius: 50px !important;
-    margin-top:10px;
+    height: 35px !important;
+    border-radius: 10px !important;
+    /*margin-top:10px;*/
 }
 
 .circle {

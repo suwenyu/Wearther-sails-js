@@ -266,6 +266,22 @@ input[type=text]:focus {
     text-align: center;
     color: #868686;
 }
+.select-wrapper{
+    background-color: #e6e6e6;
+}
+.caret{
+    padding-right: 10px;
+    color: #868686 !important;
+}
+.select-dropdown{
+    text-align: center;
+}
+.locationbtn{
+    background-color: #ffb2bc;
+}
+.locationbtn:hover {
+    background-color: #dd909a;
+}
 
 @media screen and (max-width: 600px) {
     .nav-icon {

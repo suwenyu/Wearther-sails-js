@@ -362,34 +362,33 @@
           <h5>設定預報地區</h5>
             <div class="row margin">
               <div class="input-field col s12 m6 offset-m3">
-                  <select name="location" form="location-set">
-                    <option value="" disabled selected>選擇地區</option>
-                    <option value="taipei">台北市</option>
-                    <option value="taichung">台中市</option>
-                    <option value="kaohsiung">高雄市</option>
-                    <option value="???">???</option>
+                  <select id="location" name="location" form="location-set">
+                    <!-- <option value="" disabled selected>選擇地區</option> -->
+                    <option value="台北市 文山區">台北市 文山區</option>
+                    <option value="台中市 西區">台中市 西區</option>
+                    <option value="高雄市 苓雅區">高雄市 苓雅區</option>
                   </select>
               </div>
             </div>
             <div class="row margin">
               <div class="input-field col s12 m6 offset-m3">
-                  <select name="timeset" form="location-set">
-                    <option value="" disabled selected>選擇時間</option>
-                    <option value="3">3小時後</option>
-                    <option value="6">6小時後</option>
-                    <option value="12">12小時後</option>
-                    <option value="24">全天</option>
+                  <select id="timezone" name="timeset" form="location-set">
+                    <!-- <option value="" disabled selected>選擇時間</option> -->
+                    <option value="3小時後">3小時後</option>
+                    <option value="6小時後">6小時後</option>
+                    <option value="12小時後">12小時後</option>
+                    <option value="全天">全天</option>
                   </select>
               </div>
             </div>
             
-          <form id="location-set" role="form" action="" method="GET" >
+          <!-- <form id="location-set" role="form" action="" method="GET" > -->
             <div class="row" style="margin-top: 10px">
               <div class="col s12 m6 offset-m3">
-                <button type="submit" class="locationbtn btn btn-success btn-block" style="width:100%"><span class="glyphicon glyphicon-off"></span>確定</button>
+                <button onclick="setlocation()" class="locationbtn btn btn-success btn-block modal-close" style="width:100%"><span class="glyphicon glyphicon-off"></span>確定</button>
               </div>
             </div>
-          </form>
+          <!-- </form> -->
         </div>
         <div class="modal-footer">
         </div>
@@ -778,6 +777,21 @@ function toggleSearch() {
         x.style.display = 'block';
     } else {
         x.style.display = 'none';
+    }
+}
+function setlocation() {
+    var x = document.getElementById("location").value;
+    var y = document.getElementById("timezone").value;
+    // document.getElementById("demo").innerHTML = x+y;
+    if(x == "" || y == ""){
+
+    }
+    else{
+      // alert(x+' '+y);
+      a = '<i class="fa fa-map-marker" aria-hidden="true"></i> ';
+      b = '<i class="fa fa-clock-o" aria-hidden="true"></i> ';
+      document.getElementById("locationarea").innerHTML = a+x;
+      document.getElementById("timearea").innerHTML = b+y;
     }
 }
 </script>

@@ -282,6 +282,9 @@ input[type=text]:focus {
 .locationbtn:hover {
     background-color: #dd909a;
 }
+#location,#timezone{
+    z-index: 1100;
+}
 
 @media screen and (max-width: 600px) {
     .nav-icon {

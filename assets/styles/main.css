@@ -79,6 +79,12 @@ img {
 #nav_desk{
     padding-top: 40px;
 }
+
+.nav_fx1{
+    margin-bottom: 5px;
+    margin-top: 15px;
+}
+
 .fa, .profile a{
     color: #fff;
     padding-left: 5px;
@@ -168,9 +174,9 @@ form p {
 }
 
 .clothes-tag{
-    height: 30px !important;
-    border-radius: 50px !important;
-    margin-top:10px;
+    height: 35px !important;
+    border-radius: 10px !important;
+    /*margin-top:10px;*/
 }
 
 .circle {
@@ -220,8 +226,65 @@ input[type=text]:focus {
     background-color: white;
 }
 */
+.feedselect > input {
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
 
+}
+.feedselect > input + i{
+  cursor:pointer;
+  /*border:2px solid transparent;*/
+}
+.feedselect > input:checked + i{
+    color: #2bbbad;
+}
+.rating > div{
+    float: left;
+}
+.show-only-small{
+    display: none;
+}
 
+#locationset{
+    margin-top:-45px;
+
+}
+#locationset > p{
+    font-size: 16px;
+    float: left;
+    padding-right: 15px;
+}
+.modalclose{
+    background-color: rgba(255,255,255,0);
+    border: 0px #fff solid;
+    text-align: center;
+}
+.modalclose > i {
+    color: #868686;
+}
+.modal-body{
+    text-align: center;
+    color: #868686;
+}
+.select-wrapper{
+    background-color: #e6e6e6;
+}
+.caret{
+    padding-right: 10px;
+    color: #868686 !important;
+}
+.select-dropdown{
+    text-align: center;
+}
+.locationbtn{
+    background-color: #ffb2bc;
+}
+.locationbtn:hover {
+    background-color: #dd909a;
+}
+#location,#timezone{
+    z-index: 1100;
+}
 
 @media screen and (max-width: 600px) {
     .nav-icon {
@@ -240,6 +303,9 @@ input[type=text]:focus {
         text-align: center;
     }
     .i_am_nothing{
+        display: block;
+    }
+    .show-only-small{
         display: block;
     }
 }

@@ -364,9 +364,24 @@
               <div class="input-field col s12 m6 offset-m3">
                   <select id="location" name="location" form="location-set">
                     <!-- <option value="" disabled selected>選擇地區</option> -->
-                    <option value="台北市 文山區">台北市 文山區</option>
-                    <option value="台中市 西區">台中市 西區</option>
-                    <option value="高雄市 苓雅區">高雄市 苓雅區</option>
+                    <option value="Keelung">基隆縣</option>
+                    <option value="Taipei">台北市</option>
+                    <option value="Taoyuan">桃園市</option>
+                    <option value="Hsinchu">新竹縣</option>
+                    <option value="Miaoli">苗栗縣</option>
+                    <option value="Taichung">台中市</option>
+                    <option value="Hanghua">彰化縣</option>
+                    <option value="Nantou">南投縣</option>
+                    
+                    <option value="Yunlin">雲林縣</option>
+                    <option value="Chiayi">嘉義縣</option>
+                    <option value="Tainan">台南市</option>
+                    <option value="Kaohsiung">高雄市</option>
+                    <option value="Pingtung">屏東線</option>
+                    <option value="Yilan">宜蘭縣</option>
+                    <option value="Hualien">花蓮縣</option>
+                    <option value="Taitung">台東縣</option>
+                    <option value="Penghu">澎湖縣</option>
                   </select>
               </div>
             </div>
@@ -374,10 +389,11 @@
               <div class="input-field col s12 m6 offset-m3">
                   <select id="timezone" name="timeset" form="location-set">
                     <!-- <option value="" disabled selected>選擇時間</option> -->
-                    <option value="3小時後">3小時後</option>
-                    <option value="6小時後">6小時後</option>
-                    <option value="12小時後">12小時後</option>
-                    <option value="全天">全天</option>
+                    <option value="0" id="0">現在</option>
+                    <option value="1" id="3">3小時後</option>
+                    <option value="2" id="6">6小時後</option>
+                    <option value="4" id="12">12小時後</option>
+                    <option value="8" id="24">24小時後</option>
                   </select>
               </div>
             </div>
@@ -385,7 +401,7 @@
           <!-- <form id="location-set" role="form" action="" method="GET" > -->
             <div class="row" style="margin-top: 10px">
               <div class="col s12 m6 offset-m3">
-                <button onclick="setlocation()" class="locationbtn btn btn-success btn-block modal-close" style="width:100%"><span class="glyphicon glyphicon-off"></span>確定</button>
+                <button onclick="getforcastweather()" class="locationbtn btn btn-success btn-block modal-close" style="width:100%"><span class="glyphicon glyphicon-off"></span>確定</button>
               </div>
             </div>
           <!-- </form> -->
@@ -398,7 +414,91 @@
   </div> 
 
 <script>
+
+
+
+function getforcastweather(){
+  var e = document.getElementById("location");
+  var location_data = e.options[e.selectedIndex].value;
+  var location_text = e.options[e.selectedIndex].text;
+
+  var e = document.getElementById("timezone");
+  var forecasttime_data = e.options[e.selectedIndex].value;
+  var forecasttime_text = e.options[e.selectedIndex].text;
+
+  var e = document.getElementById("timezone");
+  var forecasttime_id = e.options[e.selectedIndex].id;
+
+
+  $('#locationarea').html('<i class="fa fa-map-marker" aria-hidden="true"></i> '+ location_text+'</p>');
+  $('#timearea').html('<i class="fa fa-clock-o" aria-hidden="true"></i> '+ forecasttime_text+'</p>');
+  // console.log(location_data , forecasttime_data);
+  // console.log(location_text , forecasttime_text);
+  // console.log('test');
+
+  $.ajax({
+    method: 'GET',
+    url:'http://api.worldweatheronline.com/premium/v1/weather.ashx?key=be8f810e29c54a748be73359172705&q='+location_data+'&format=json&num_of_days=2&includelocation=yes'
+  }).done(function(data){
+
+      var result = {};
+
+      var weather_day = 0;
+      var weather_time = getCurrentTime();
+      // console.log(weather_time);
+      weather_time = weather_time + parseInt(forecasttime_data);
+      // console.log(weather_time);
+
+      if(weather_time >= 8){
+        weather_day = weather_day + 1;
+        weather_time = weather_time - 8;
+      }
+
+      console.log(data.data.weather[weather_day].hourly[weather_time].tempC);
+
+      var new_weather = {};
+      new_weather['temp'] = data.data.weather[weather_day].hourly[weather_time].tempC;
+      new_weather['chanceofrain'] = data.data.weather[weather_day].hourly[weather_time].chanceofrain;
+      new_weather['weatherDesc'] = data.data.weather[weather_day].hourly[weather_time].weatherDesc[0].value;
+      var new_location = {};
+      new_location['lat'] = data.data.nearest_area[0].latitude;
+      new_location['lng'] = data.data.nearest_area[0].longitude;
+
+
+      console.log(new_weather);
+      result['new_weather'] = new_weather;
+
+      getLocation().then(function(data){
+
+        // console.log(data);
+        data['new_weather'] = new_weather;
+        data['location']['city'] = '台灣';
+        data['location']['dist'] = location_text;
+        data['location']['new_location'] = new_location;
+        data['forecast'] = forecasttime_id;
+
+        return getAQI(data);
+      }).then(function(data){
+        return appendData(data);
+      }).then(function(data){
+        return deliverData(data);
+        // console.log('test success');
+      }).then(function(data){
+        
+        appendClothes(data);
+      }).then(function(data){
+        console.log('test success');
+      });
+      // console.log(test.location);
+
+
+  });
+
+}
+
+
 $(document).ready(function(){
+
     
     $('#modal1').modal();
     $('#modal2').modal();
@@ -438,7 +538,6 @@ $(document).ready(function(){
       }
       console.log(test);
 
-      
 
       // $("#"+clothes_name ).attr('class', 'btn-flat grey lighten-2 white-text clothes-tag-save');
 
@@ -696,11 +795,32 @@ function appendData(result){
 
 function getAQI(result){
   return new Promise(function(resolve, reject){
+    if(result.location.new_location!=undefined){
+      console.log('test');
+      var weather_url = 'https://api.breezometer.com/baqi/?lat='+result.location.new_location.lat+'&lon='+result.location.new_location.lng+'&hours='+result.forecast+'&key=48146dcc571e4588b368d2531eac97f0'
+    }
+    else{
+      var weather_url = 'https://api.breezometer.com/baqi/?lat='+result.location.lat+'&lon='+result.location.lng+'&key=48146dcc571e4588b368d2531eac97f0&fields=country_aqi,country_color'
+    }
+
     $.ajax({
       method:'GET',
-      url:'https://api.breezometer.com/baqi/?lat='+result.location.lat+'&lon='+result.location.lng+'&key=48146dcc571e4588b368d2531eac97f0&fields=country_aqi,country_color'
+      url:weather_url
     }).done(function(data){
+      if(data.country_aqi <= 50){
+        data.country_color="#81f981";
+      }
+      else if(data.country_aqi <= 100){
+        data.country_color="#f7f053";
+      }
+      else if(data.country_aqi <= 150){
+        data.country_color="#fdb675";
+      }
+      else if(data.country_aqi <=200){
+        data.country_color="#fd9494";
+      }
       result['aqi'] = data;
+
       resolve(result);
     });
   });
@@ -762,7 +882,7 @@ function getLocation(){
       loca_data['location'] = location;
       console.log(loca_data);
 
-      resolve(loca_data);lng
+      resolve(loca_data);
     }
   });
 

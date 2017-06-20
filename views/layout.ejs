@@ -438,7 +438,7 @@ function getforcastweather(){
 
   $.ajax({
     method: 'GET',
-    url:'http://api.worldweatheronline.com/premium/v1/weather.ashx?key=be8f810e29c54a748be73359172705&q='+location_data+'&format=json&num_of_days=2&includelocation=yes'
+    url:'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=be8f810e29c54a748be73359172705&q='+location_data+'&format=json&num_of_days=2&includelocation=yes'
   }).done(function(data){
 
       var result = {};

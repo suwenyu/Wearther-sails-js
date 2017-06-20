@@ -484,7 +484,7 @@ function getforcastweather(){
         return deliverData(data);
         // console.log('test success');
       }).then(function(data){
-        
+
         appendClothes(data);
       }).then(function(data){
         console.log('test success');
@@ -831,7 +831,7 @@ function getWeather(result){
   return new Promise(function(resolve , reject){
     $.ajax({
       method:'GET',
-      url:"http://api.openweathermap.org/data/2.5/weather?lat="+result.location.lat+"&lon="+result.location.lng+"&APPID=ed87a12dc271a93d5f2d75fa2e4f426b"
+      url:"https://api.openweathermap.org/data/2.5/weather?lat="+result.location.lat+"&lon="+result.location.lng+"&APPID=ed87a12dc271a93d5f2d75fa2e4f426b"
     }).done(function(data){
       var weather_data = {}
       weather_data['countryname'] = data.name;

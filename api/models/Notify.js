@@ -11,6 +11,12 @@ module.exports = {
   	device:{
   		type:'string',
   		required: true
+  	},
+  	lat:{
+  		type:'string'
+  	},
+  	lng:{
+  		type:'string'
   	}
   }
 };

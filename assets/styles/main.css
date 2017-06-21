@@ -187,10 +187,12 @@ form p {
     border-radius: 50%;
     width: 30px;
     height: 30px; 
+    /* width and height can be anything, as long as they're equal */
+}
+.wea_content > div{
     float: left;
     margin-top: 10px;
     margin-right: 8px;
-    /* width and height can be anything, as long as they're equal */
 }
 
 /*#file {

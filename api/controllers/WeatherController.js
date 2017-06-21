@@ -24,7 +24,7 @@ module.exports = {
   		var occa = '休閒';
 
   		if(feel != undefined){
-  			today_temp_delta = today_temp_delta+feel;
+  			today_temp_delta = today_temp_delta+parseInt(feel);
   		}
   		console.log(today_temp_delta);
   		

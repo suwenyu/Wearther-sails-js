@@ -56,12 +56,20 @@ module.exports.connections = {
   * Run: npm install sails-mongo                                             *
   *                                                                          *
   ***************************************************************************/
+  // someMongodbServer: {
+  //   adapter: 'sails-mongo',
+  //   schema: true,
+  //   // url: process.env.DB_URL,
+  //   url:'mongodb://nccucsboy:nccucsboy@ds123050.mlab.com:23050/weather_clothes',
+  // }
   someMongodbServer: {
-    adapter: 'sails-mongo',
-    schema: true,
-    // url: process.env.DB_URL,
-    url:'mongodb://nccucsboy:nccucsboy@ds123050.mlab.com:23050/weather_clothes',
-  }
+    adapter   : 'sails-mongo',
+    host      : 'localhost',
+    port      : 27017,
+    user      : 'nccucsboy',
+    password  : 'nccucsboy',
+    database  : 'weather_clothes'
+  },
 
   /***************************************************************************
   *                                                                          *

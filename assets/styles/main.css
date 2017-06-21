@@ -120,8 +120,17 @@ img {
 .profile{
     text-align: right;
 }
+.profile > img{
+    width: 50px;
+    margin-top: -20px;
+}
 .navbutton{
     padding-top: 10px !important;
+}
+.navuser{
+    margin-top: 7px;
+    width: 50px !important;
+    height: 50px !important;
 }
 .hr{
     width:100%; 

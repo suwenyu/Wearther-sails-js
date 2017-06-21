@@ -123,12 +123,14 @@
                     <i class="fa fa-search fa-lg"></i>
                   </a>
                 </div>
-                <div class="col s4 ">
+                <div class="col s4">
+                <!-- <div class="col s3 offset-s2" style="position: absolute;"> -->
                 <form role="search" method="POST" action="/posts/search">
                   <input type="text" id="autocomplete-input" class="autocomplete" style="color:white;height:2rem;margin:0px" name="q">
                 </form>
                   
                 </div>
+                <div class="col s1 right"></div>
                 
                 <% if (session.authenticated) { %>
                   <div class="col s1 offset-s2 profile">
@@ -136,15 +138,14 @@
                         <img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="70" width="70" alt="" class="circle responsive-img">
                     <% } %>
                   </div>
-                  <div class="col s2">
+                  <div class="col s2 right">
                     <a href="/account/index/<%= session.User.id %>"><%= session.User.name %> </a>
                   </div>
                 <% } else { %>
-                  <div class="col s2 offset-s2 profile">
+                  <div class="col s2 offset-s2 right profile">
                     <a id="myBtn" href="#modal1"><i class="fa fa-sign-in" aria-hidden="true"></i> Sign in</a>
                   </div>
                 <% } %>
-
 
 
     
@@ -913,6 +914,16 @@ function setlocation() {
       document.getElementById("locationarea").innerHTML = a+x;
       document.getElementById("timearea").innerHTML = b+y;
     }
+}
+
+function poppop(el) {
+  var timer;
+   $('.popuptext').removeClass('show');
+    var popup = document.getElementById("myPopup" + el);
+    popup.classList.toggle("show");
+    var s = '#myPopup' + el;
+    timer = setTimeout(function(){ $(s).removeClass("show"); }, 1000);
+
 }
 </script>
 

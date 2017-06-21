@@ -1,6 +1,6 @@
 module.exports.cron = {
   myFirstJob: {
-    schedule: '* */10 * * * *',
+    schedule: '* 10 * * * *',
     onTick: function () {
 
 	var apn = require('apn');

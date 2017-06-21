@@ -70,7 +70,7 @@
             <li>
                 <% if (session.authenticated) { %>
                     <% if(session.User.fbid) { %>
-                        <a href="/account/index/<%= session.User.id %>"><img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="50" width="50" alt="" class="img-circle "></a>
+                        <a href="/account/index/<%= session.User.id %>"><img src="https://graph.facebook.com/<%- session.User.fbid %>/picture?type=large&return_ssl_results=1" height="50" width="50" alt="" class="circle img-circle navuser"></a>
                     <% } %>
                     
                   <!-- <a href="/account/index/<%= session.User.id %>"><%= session.User.name %> </a>  -->

@@ -1,6 +1,6 @@
 module.exports.cron = {
   myFirstJob: {
-    schedule: '* 10 * * * *',
+    schedule: '*/30 * * * *',
     onTick: function () {
 
 	var apn = require('apn');
@@ -157,51 +157,6 @@ module.exports.cron = {
 		});
 	}
 
-	function runrequest(device_data){
-		return new Promise(function(resolve, reject){
-			request({
-				url:'https://api.worldweatheronline.com/premium/v1/weather.ashx?key=be8f810e29c54a748be73359172705&q='+parseFloat(device_data.lat).toFixed(2)+','+parseFloat(device_data.lng).toFixed(2)+'&format=json&num_of_days=1&includelocation=yes',
-				method:'GET'
-			}, function(error, response, body){
-				body = JSON.parse(body);
-				var temp = body.data.weather[0].hourly[2].tempC;
-				var pop = body.data.weather[0].hourly[2].chanceofrain;
-
-				device_data['temp'] = temp;
-				device_data['pop'] = pop;
-				// console.log(device_data.device);
-
-				recomclothes(device_data).then(function(device_data){
-					// console.log(device_data);
-					console.log(device_data.device);
-
-					var notification = new apn.Notification();
-
-					notification.topic = 'com.nccu.wearther';
-					notification.sound = 'ping.aiff';
-
-					notification.alert = 'Hello World \u270C';
-
-					
-					notification.alert = "temperature:" + device_data.temp +"℃ chance of rain:" + device_data.pop +"% recom_body:" + device_data.recom_body + "recom_foot" + device_data.recom_foot;
-					deviceToken = device_data.device;
-
-					apnProvider.send(notification, deviceToken).then(function(result) {  
-					    // Check the result for any failed devices
-					    console.log(result);
-					    resolve('success');
-					});
-					
-
-					
-
-				});
-
-
-			});
-		
-		});
-	}
 
 
 	// Set up apn with the APNs Auth Key
@@ -274,23 +229,6 @@ module.exports.cron = {
 
 			});
 		}
-
-
-
-
-	
-      	// for(i = 0 ; i < data.length;i++){
-      	// 	console.log(i);
-      	// 	device_data['device'] = data[i].device;
-      	// 	device_data['lat'] = data[i].lat;
-      	// 	device_data['lng'] = data[i].lng;
-      	// 	console.log(device_data.device);
-
-
-      	// 	runrequest(device_data).then(function(data){
-      	// 		console.log(data);
-      	// 	});
-      	// }
 
 
 

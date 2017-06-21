@@ -12,7 +12,7 @@ module.exports = {
 		var lng = req.param('lng');
 		var deivce_id = req.param('deviceid');
 
-		Notify.find({'deivce' : deivce_id }).exec(function(err, found){
+		Notify.find({"device" : deivce_id }).exec(function(err, found){
 				console.log(found);
 				if(!found){
 					console.log('1');

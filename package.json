@@ -22,6 +22,7 @@
     "include-all": "^1.0.0",
     "materialize-css": "^0.98.2",
     "rc": "1.0.1",
+    "request": "^2.81.0",
     "sails": "~0.12.13",
     "sails-disk": "~0.10.9",
     "sails-hook-cron": "^2.2.0",

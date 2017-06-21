@@ -10,7 +10,6 @@ module.exports = {
   attributes: {
   	device:{
   		type:'string',
-  		required: true
   	},
   	lat:{
   		type:'string'

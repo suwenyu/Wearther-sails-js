@@ -552,6 +552,7 @@ $(document).ready(function(){
       var formData = new FormData();
       formData.append('type', 'file');
       formData.append('image', $('input[type=file]')[0].files[0]);
+      console.log($('input[type=file]')[0].files[0]);
       // for (var pair of formData.entries()) {
       //   console.log(pair[0]+ ', ' + pair[1]); 
       // }
@@ -562,7 +563,7 @@ $(document).ready(function(){
         "url": "https://api.imgur.com/3/image",
         "method": "POST",
         "headers": {
-          "authorization": "Bearer 2738382cd811d5314f847424f8dbbc45e1a51c23",
+          "authorization": "Bearer 550d672c74884b600d2e73559db6aa3b4075a483",
         },
         "processData": false,
         "contentType": false,

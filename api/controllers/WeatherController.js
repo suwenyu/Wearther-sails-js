@@ -14,6 +14,7 @@ module.exports = {
   		var location = req.param('location');
   		var weather = req.param('weather_data');
   		var	aqi = req.param('aqi');
+  		var feel = req.param('feel');
 
   		console.log(location, weather, aqi);
   		req.session.location = location;
@@ -21,6 +22,11 @@ module.exports = {
   		var gender = 'male';
   		var today_temp_delta = 10;
   		var occa = '休閒';
+
+  		if(feel != undefined){
+  			today_temp_delta = today_temp_delta+feel;
+  		}
+  		console.log(today_temp_delta);
   		
   		if (today_temp_delta <= 3){
     		Clothes.find({"warm":{$lte: 0.3}, "sex":gender,"part":"body", "occasion":occa},{'weather_clothes':1}).exec(function (err, body) {
@@ -128,18 +134,18 @@ module.exports = {
     		Clothes.find({"warm":0.5 , "sex":gender , "part":"body","occasion":occa},{'weather_clothes':1}).exec	(function(err,body){
     			var recom_body = [];
 				var recom_foot = [];
-				recom_body.push(body[Math.floor(Math.random()*body.length)]);
+				recom_body.push(body[Math.floor(Math.random()*body.length)].weather_clothes);
 
 				Clothes.find({"warm":3 ,  "sex":gender , "part":"body","occasion":occa},{'weather_clothes':1}).exec(function(err,body){
-					recom_body.push(body[Math.floor(Math.random()*body.length)]);
+					recom_body.push(body[Math.floor(Math.random()*body.length)].weather_clothes);
 					Clothes.find({"warm":{$gte:4,$lte:6} ,  "sex":gender , "part":"body","occasion":occa},{'weather_clothes':1}).exec(function(err,body){
-						recom_body.push(body[Math.floor(Math.random()*body.length)]);
+						recom_body.push(body[Math.floor(Math.random()*body.length)].weather_clothes);
 
 						Clothes.find({"warm":0.5 ,"sex":gender, "part":"foot"},{'weather_clothes':1}).exec(function(err,foot){
-							recom_foot.push(foot[Math.floor(Math.random()*foot.length)]);
+							recom_foot.push(foot[Math.floor(Math.random()*foot.length)].weather_clothes);
 							
 							Clothes.find({"warm":9 ,  "sex":gender , "part":"body","occasion":occa},{'weather_clothes':1}).exec(function(err,body){
-								recom_body.push(body[Math.floor(Math.random()*body.length)]);
+								recom_body.push(body[Math.floor(Math.random()*body.length)].weather_clothes);
 								console.log(recom_body,recom_foot);
 								var accessory = ['毛帽', '長襪']
 								res.json({
@@ -158,6 +164,16 @@ module.exports = {
     		});
     	}
   		
-  	}
+  	},
+  	feedback:function(req, res, next){
+		var data = req.body;
+		console.log(data);
+		Userfeedback.create(data).exec(function (err, feedback_data){
+		  if (err) { return res.serverError(err); }
+		  console.log(feedback_data);
+
+		  return res.ok();
+		});
+	}
 };
 

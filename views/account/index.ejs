@@ -20,7 +20,7 @@
 			<ul class="tabs">
 			    <li class="tab col s4"><a href="#inbox">我的衣櫥</a></li>
 			    <li class="tab col s4"><a href="#unread">追蹤中</a></li>
-			    <li class="tab col s4"><a href="#sent">Sent</a></li>
+			    <li class="tab col s4"><a href="#sent">被追蹤</a></li>
 	  		</ul>
 		</div>
 	</div>
@@ -88,7 +88,31 @@
 			</div>
 		</div>
 	</div>
-	<div id="sent" class="col s12">Sent</div>
+	<div id="sent" class="col s12">
+		<table class="col s8 offset-s2">
+			<thead>
+				<tr>
+					<th></th>
+					<th>名字</th>
+				</tr>
+			</thead>
+
+			<tbody>
+				<% if (followed_data.length != 0 ) { %>
+					<% followed_data.forEach(function(data){ %>
+					<tr>
+						<% if(data.followed_user[0].fbid != undefined){ %>
+						<th><img src="https://graph.facebook.com/<%- data.followed_user[0].fbid %>/picture?type=large&return_ssl_results=1" alt="" height="50px" width="50px"></th>
+						<% } else { %>
+						<th></th>
+						<% } %>
+						<th><%- data.followed_user[0].name %></th>
+					</tr>
+					<% }); %>
+				<% } %>
+			</tbody>
+		</table>
+	</div>
 
 
 

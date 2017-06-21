@@ -38,11 +38,37 @@ module.exports = {
                     }
                     ],function(err, follow_data){
                         console.log(follow_data);
-                        res.view('account/index',{
-                            user_data:user_data,
-                            result: result,
-                            follow_data: follow_data
+
+                        Follow.native(function(err, collection){
+                            collection.aggregate([
+                            {
+                                $lookup:{
+                                    from: "user",
+                                    localField: "from",
+                                    foreignField: "_id",
+                                    as: "followed_user"
+                                }
+                            },
+                            {
+                                $match:{
+                                    to: new ObjectId(user_data.id)
+                                }
+                            }
+                            ],function(err, followed_data){
+                                console.log(followed_data);
+
+                                res.view('account/index',{
+                                    user_data:user_data,
+                                    result: result,
+                                    follow_data: follow_data,
+                                    followed_data: followed_data
+                                });
+                            });
                         });
+
+
+
+                        
                     });
                 });
 

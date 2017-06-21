@@ -22,7 +22,7 @@
           <div class="row">
             <div class="col s12">
               <div class="row navi_fx1">
-                <div class="col s4 m3 dress_icon"><img src="/images/T-Shirt.png"></div>
+                <div class="col s4 m3 dress_icon"><img src="/images/tshirt.png"></div>
                 <div class="col s8 m4 dress_name" id="recom_body"><div>T-Shirt 透氣的上衣</div></div>
                 <!-- <div class="col s5 dress_detail">Loeafr is addio para mi coma es una prezia</div> -->
               </div>
@@ -30,7 +30,7 @@
             <div class="col s12" style="padding-top: 30px;"></div>
             <div class="col s12">
               <div class="row">
-                <div class="col s4 m3 dress_icon"><img src="/images/Trousers.png"></div>
+                <div class="col s4 m3 dress_icon"><img src="/images/pant.png"></div>
                 <div class="col s8 m4 dress_name" id="recom_foot"><div>短褲、七分褲</div></div>
                 <!-- <div class="col s5 dress_detail">Loeafr is addio para mi coma es una prezia</div> -->
               </div>
@@ -38,8 +38,8 @@
             <div class="col s12" style="padding-top: 30px;"></div>
             <div class="col s12">
               <div class="row">
-                <div class="col s4 m3 dress_icon"><i class="fa fa-umbrella fa-5x" aria-hidden="true"></i></div>
-                <div class="col s8 m4 dress_name" id="recom_foot"><div>先頂個之後換個圖</div></div>
+                <div class="col s4 m3 dress_icon"><img src="/images/accessories.png"></div>
+                <div class="col s8 m4 dress_name" id="recom_foot"><div></div></div>
                 <!-- <div class="col s5 dress_detail">Loeafr is addio para mi coma es una prezia</div> -->
               </div>
             </div>
@@ -51,9 +51,10 @@
               <div>搭配方式 &nbsp;&nbsp;</div>
               <div>
                 <form>
-                  <label class="feedselect"><input type="radio" name="style" value="good"><i class="fa fa-smile-o fa-2x popup" aria-hidden="true" onclick="poppop(1)"><span class="popuptext" id="myPopup1">滿意</span></i></label>
-                  <label class="feedselect"><input type="radio" name="style" value="meh"><i class="fa fa-meh-o fa-2x popup" aria-hidden="true" onclick="poppop(2)"><span class="popuptext" id="myPopup2">普通</span></i></label>
-                  <label class="feedselect"><input type="radio" name="style" value="bad"><i class="fa fa-frown-o fa-2x popup" aria-hidden="true" onclick="poppop(3)"><span class="popuptext" id="myPopup3">不滿意</span></i></label>
+                <img src="/images/1.png" class='feedback tooltipped' id='in_love' width="30px" height="30px" alt="" data-toggle="tooltip" title="In-Love" data-placement="bottom" data-tooltip="In-Love">
+                <img src="/images/2.png" class='feedback tooltipped' id='okay' width="30px" height="30px" alt="" data-toggle="tooltip" title="Okay" data-placement="bottom" data-tooltip="Okay">
+                <img src="/images/3.png" class='feedback tooltipped' id='sad' width="30px" height="30px" alt="" data-toggle="tooltip" title="Sad" data-placement="bottom" data-tooltip="Sad">
+                  
                 </form>
               </div>
             </div>
@@ -62,16 +63,132 @@
               <div>保暖程度 &nbsp;&nbsp;</div>
               <div>
                 <form>
-                  <label class="feedselect"><input type="radio" name="weafit" value="hot"><i class="fa fa-fire fa-2x popup" aria-hidden="true" onclick="poppop(4)"><span class="popuptext" id="myPopup4">太熱</span></i></label>
-                  <label class="feedselect"><input type="radio" name="weafit" value="nice"><i class="fa fa-thumbs-o-up fa-2x popup" aria-hidden="true" onclick="poppop(5)"><span class="popuptext" id="myPopup5">滿意</span></i></label>
-                  <label class="feedselect"><input type="radio" name="weafit" value="cold"><i class="fa fa-snowflake-o fa-2x popup" aria-hidden="true" onclick="poppop(6)"><span class="popuptext" id="myPopup6">太冷</span></i></label>
+                  <img src="/images/b.png" class='feedback_temp tooltipped' id='hot' width="30px" height="30px" alt="" data-toggle="tooltip" title="Hot" data-placement="bottom" data-tooltip="Hot">
+                  <img src="/images/a.png" class='feedback_temp tooltipped' id='soso' width="30px" height="30px" alt="" data-toggle="tooltip" title="Soso" data-placement="bottom" data-tooltip="Soso">
+                  <img src="/images/c.png" class='feedback_temp tooltipped' id='cold' width="30px" height="30px" alt="" data-toggle="tooltip" title="Cold" data-placement="bottom" data-tooltip="Cold">
                 </form>
               </div>
             </div>
             <div class="show-only-small"><br><br></div>
-            <div class="col s3 m2 offset-s4" style="text-align: center">
-              <button id="feedbackbtn" style="background-color: rgba(255,255,255,0);border: 1px #fff solid;border-radius: 4px;">送出</button>
-            </div>
           </div>
         </div>
       </div>
+
+
+<div class="modal fade" id="FeedbackNotify" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Feedback Notify</h4>
+        </div>
+        <div class="modal-body">
+          <p>謝謝您的回饋！</p>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default modal-close" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+
+
+
+<script>
+  $('#in_love').hover(function() {
+        $("#in_love").addClass('transition');
+    
+    }, function() {
+        $("#in_love").removeClass('transition');
+    });
+  $('#okay').hover(function() {
+        $("#okay").addClass('transition');
+    
+    }, function() {
+        $("#okay").removeClass('transition');
+    });
+  $('#sad').hover(function() {
+        $("#sad").addClass('transition');
+    
+    }, function() {
+        $("#sad").removeClass('transition');
+    });
+  $('#hot').hover(function() {
+        $("#hot").addClass('transition');
+    
+    }, function() {
+        $("#hot").removeClass('transition');
+    });
+  $('#soso').hover(function() {
+        $("#soso").addClass('transition');
+    
+    }, function() {
+        $("#soso").removeClass('transition');
+    });
+  $('#cold').hover(function() {
+        $("#cold").addClass('transition');
+    
+    }, function() {
+        $("#cold").removeClass('transition');
+    });
+
+$(document).ready(function(){
+    $('.tooltipped').tooltip({delay: 50});
+  });
+
+$('.feedback').click(function(){
+  var data = {};
+  <% if (session.authenticated) { %>
+    data['userid'] = "<%= session.User.id %>";
+  <% } %>
+
+
+
+  data['mood'] = $(this).attr('id');
+  data['clothes'] = $('#recom_body').text();
+
+  $.ajax({
+    method:'POST',
+    url:'/weather/feedback',
+    data:data
+  }).done(function(){
+    $("#FeedbackNotify").modal();
+    $('#FeedbackNotify').modal('open');
+    console.log('success');
+  });
+
+});
+
+$('.feedback_temp').click(function(){
+
+  var feel = $(this).attr('id');
+  
+  getLocation().then(function(data){
+   if(feel=="hot"){
+      data['feel'] = -3;
+    }
+    else if(feel == "cold"){
+      data['feel'] = 3;
+    }
+    else{
+      data['feel'] = 0;
+    }
+    $.ajax({
+      url:'/weather/clothes',
+      method: 'GET',
+      data:data
+    }).done(function(data){
+      console.log(data);
+      
+      appendClothes(data);
+    });
+  
+  });
+
+});
+
+
+
+</script>
